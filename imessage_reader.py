@@ -1,6 +1,16 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+"""
+main.py
+The main file with the entry point for this program.
+Python 3.7
+Author: niftycode
+Date created: 28.10.2018
+Date edited: 22.04.2019
+"""
+
+
 import os
 from imessage_reader import common
 
@@ -12,16 +22,19 @@ DB_PATH = '/Users/{0}/Library/Messages/chat.db'.format(os.getlogin())
 
 # TODO - 14.06.2019: Move this class to a separate file.
 class Recipient:
-    def __init__(self, id, identifier):
+    def __init__(self, rowid, id):
+        self.rowid = rowid
         self.id = id
-        self.identifier = identifier
 
     def __repr__(self):
-        return f"id: {self.id}"
+        return f"{self.rowid}: {self.id}"
 
 
 def fetch_recipients():
-    
+    sql_command = "SELECT ROWID, id from handle"
+    rval = common.fetch_db_data(DB_PATH, sql_command)
+
+    print(rval)
 
 
 """
@@ -44,10 +57,11 @@ def main():
     """
     The entry point of this program.
     """
+    fetch_recipients()
 
 
 if __name__ == '__main__':
-    print('\n\n    #### A Python script to analyze browser data ####')
+    print('\n\n    ##### A Python script to read iMessage data #####')
     print('    #               Created by niftycode            #')
     print(f'    #                  Version {VERSION}                #')
     print('    #################################################\n\n')

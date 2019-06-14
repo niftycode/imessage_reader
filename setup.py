@@ -8,7 +8,7 @@ setup(
 
     author='Bodo Schönfeld',
     author_email='bodo.schoenfeld@niftycode.de',
-    url='https://github.com/niftycode/browser_forensics',
+    url='https://github.com/niftycode/imessage_reader',
 
     packages=find_packages(exclude=('tests', 'docs')),
 
