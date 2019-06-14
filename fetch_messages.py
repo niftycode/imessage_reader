@@ -2,7 +2,9 @@
 # -*- coding: utf-8 -*-
 
 import os
-import common
+from imessage_reader import common
+
+VERSION = '1.0.0'
 
 # The path to the imessage database
 DB_PATH = '/Users/{0}/Library/Messages/chat.db'.format(os.getlogin())
@@ -36,3 +38,18 @@ def new_db_connection():
 
 new_db_connection()
 """
+
+
+def main():
+    """
+    The entry point of this program.
+    """
+
+
+if __name__ == '__main__':
+    print('\n\n    #### A Python script to analyze browser data ####')
+    print('    #               Created by niftycode            #')
+    print(f'    #                  Version {VERSION}                #')
+    print('    #################################################\n\n')
+    print()
+    main()
