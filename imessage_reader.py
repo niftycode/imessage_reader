@@ -2,12 +2,11 @@
 # -*- coding: utf-8 -*-
 
 """
-main.py
+imessage_reader.py
 The main file with the entry point for this program.
 Python 3.7
 Author: niftycode
-Date created: 28.10.2018
-Date edited: 22.04.2019
+Date created: 14.06.2019
 """
 
 
@@ -20,11 +19,11 @@ VERSION = '1.0.0'
 DB_PATH = '/Users/{0}/Library/Messages/chat.db'.format(os.getlogin())
 
 
-# TODO - 14.06.2019: Move this class to a separate file.
+# TODO: Move class to separate file.
 class Recipient:
-    def __init__(self, rowid, id):
+    def __init__(self, rowid, phone_id):
         self.rowid = rowid
-        self.id = id
+        self.phone_id = phone_id
 
     def __repr__(self):
         return f"{self.rowid}: {self.id}"

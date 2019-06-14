@@ -1,3 +1,4 @@
 .DS_Store
 /.vscode
 /imessage_reader/__pycache__
+/.idea
