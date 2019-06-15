@@ -61,19 +61,24 @@ def fetch_messages():
     return messages
 
 
+def show_data(r, m):
+    print(m)
+
+
+
 def main():
     """
     The entry point of this program.
     """
-    # recipients = fetch_recipients()
+    recipients = fetch_recipients()
     #
     # first_recipient = recipients[0]
     # print(first_recipient.rowid)
     # print(first_recipient.phone_id)
 
     messages = fetch_messages()
-    for i in messages:
-        print(i)
+
+    show_data(recipients, messages)
 
 
 if __name__ == '__main__':
