@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='imessage_reader',
-    version='1.0.0',
+    version='1.0.1',
     license='MIT',
     description='Fetch recipients and chat messages from the chat.db database.',
 
