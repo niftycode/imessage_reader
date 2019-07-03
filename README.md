@@ -18,7 +18,7 @@ Start the program with:
 
     python3 imessage_reader.py
 
-**Note**: Mac users need access to the *Library* folder in order to read the iMessage database file ("chat.db"). You can add access (for *Terminal* or *iTerm*) in
+**Note**: You need access to the *Library* folder in order to read the iMessage database file ("chat.db"). You can add access (for *Terminal* or *iTerm*) in
 
     > System Preferences > Security & Privacy > Privacy > Full Disk Access
 
