@@ -6,10 +6,10 @@ CHANGELOG
 1.0.0
 ---
 
-- Initial version.
+- Initial version
 
 
-1.0.1
+1.0.2
 ---
 
-- More to come here...
+- Fixed Bugs
