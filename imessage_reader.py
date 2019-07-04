@@ -13,14 +13,12 @@ Date created: 14.06.2019
 from os.path import expanduser
 from imessage_reader import common
 
-VERSION = '1.0.1'
+VERSION = '1.0.2'
 
 # The path to the iMessage database
-# DB_PATH = '/Users/{0}/Library/Messages/chat.db'.format(os.getlogin())
-DB_PATH = expanduser("~") + '/Desktop/chat.db'  # for testing only
+DB_PATH = expanduser("~") + '/Library/Messages/chat.db'
 
 
-# TODO: Move class to separate file.
 class MessageData:
     def __init__(self, user_id, text):
         self.user_id = user_id
@@ -38,15 +36,6 @@ class Recipient:
 
     def __repr__(self):
         return f"{self.rowid}: {self.phone_id}"
-
-
-class Messages:
-    def __init__(self, message, handle_id):
-        self.message = message
-        self.handle_id = handle_id
-
-    def __repr__(self):
-        return f"{self.handle_id}: {self.message}"
 """
 
 
@@ -59,12 +48,15 @@ def fetch_message_data():
         data.append(MessageData(row[1], row[0]))
     return data
 
+
 def main():
     """
     The entry point of this program.
     """
     message_data = fetch_message_data()
-    print(message_data)
+
+    for message in message_data:
+        print(message)
 
 
 if __name__ == '__main__':
