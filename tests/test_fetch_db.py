@@ -4,7 +4,7 @@
 import pytest
 import sqlite3
 import os
-from imessage_reader import common
+from src import common
 
 
 @pytest.fixture(scope='function')

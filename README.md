@@ -2,7 +2,7 @@
 
 ![](img/license-MIT-green.svg) ![](img/python-3.6-blue.svg) ![](https://img.shields.io/github/last-commit/niftycode/imessage_reader.svg?style=flat) ![](https://img.shields.io/github/issues/niftycode/imessage_reader.svg?style=flat)
 
-This is a forensic tool written in Python 3. Use this tool to fetch the content (phone numbers, email addresses and messages) from the *chat.db* database file on macOS (version 10.14 or above).
+This is a forensic tool written in Python 3. Use this tool to fetch the content (phone numbers, email addresses and messages) from the *chat.db* database file on **macOS** (version 10.14 or above).
 
 ## Background
 
@@ -10,7 +10,10 @@ Received messages (iMessage or SMS) and attachments will be saved in "~/Library/
 
 ## Requirements
 
+* **Python 3.9**
 * pytest
+* openpyxl
+* setuptools
 
 ## Usage
 
@@ -31,3 +34,5 @@ Start the program with:
 * Add more tests.
 
 ## Changelog
+
+* October 8th, 2020: Added export to Excel

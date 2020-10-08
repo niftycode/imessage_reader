@@ -3,9 +3,10 @@
 
 """
 common.py
-Python 3.7
+Python 3.9+
 Author: niftycode
-Date created: 14.06.2019
+Date created: June 14th, 2020
+Date modified: October 1st, 2020
 """
 
 
@@ -18,7 +19,7 @@ def fetch_db_data(db, command):
     Send queries to the sqlite database and return the results.
     :param db: The path to the database.
     :param command: The Sqlite command.
-    :return:
+    :return: Data from the database
     """
     try:
         conn = sqlite3.connect(db)
