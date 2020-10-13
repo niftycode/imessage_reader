@@ -3,10 +3,10 @@
 
 """
 Fetch data, print data and export data to excel.
-Python 3.9+
+Python 3.8+
 Author: niftycode
 Date created: October 8th, 2020
-Date modified: -
+Date modified: October 13th, 2020
 """
 
 
@@ -16,6 +16,18 @@ from src import write_excel
 
 # The path to the iMessage database
 DB_PATH = expanduser("~") + '/Library/Messages/chat.db'
+
+
+def iterable(cls):
+    def iterfn(self):
+        iters = dict((x, y) for x, y in cls.__dict__.items() if x[:2] != '__')
+        iters.update(self.__dict__)
+
+        for x, y in iters.items():
+            yield x, y
+
+    cls.__iter__ = iterfn
+    return cls
 
 
 class Recipient:
@@ -40,6 +52,7 @@ class Recipient:
         return f"{self.rowid}: {self.phone_id}"
 
 
+@iterable
 class MessageData:
     def __init__(self, user_id, text):
         """
@@ -60,8 +73,7 @@ class MessageData:
 # noinspection PyMethodMayBeStatic
 class FetchData:
 
-    @staticmethod
-    def fetch_message_data() -> list[MessageData]:
+    def read_database(self) -> list:
         """
         Fetch data from the database and store the data in a list.
         :return: List containing the user id and the message
@@ -74,13 +86,13 @@ class FetchData:
             data.append(MessageData(row[1], row[0]))
         return data
 
-    def fetch_user_txt(self, export: bool):
+    def show_user_txt(self, export: bool):
         """
         Call fetch_message_data() method, print fetched data and export data.
         :param export: Determine whether to export data
         """
 
-        fetched_data = self.fetch_message_data()
+        fetched_data = self.read_database()
 
         for data in fetched_data:
             print(data)
@@ -88,10 +100,28 @@ class FetchData:
         if export is True:
             self.export_data(fetched_data)
 
-    def export_data(self, data: list[MessageData]):
+    def export_data(self, data: list):
         """
         Export data (Write excel file)
         :param data: imessage objects containing user id and text
         """
         ew = write_excel.ExelWriter(data)
         ew.write_data()
+
+    def get_messages(self) -> list:
+        """
+        Create a list with tuples (user id, message)
+        :return: List with tuples (user id, message)
+        """
+        fetched_data = self.read_database()
+
+        users = []
+        messages = []
+
+        for data in fetched_data:
+            users.append(data.user_id)
+            messages.append(data.text)
+
+        users_messages = list(zip(users, messages))
+
+        return users_messages
