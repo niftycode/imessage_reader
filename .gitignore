@@ -4,3 +4,4 @@
 imessage_reader.egg-info/
 /.idea
 dist/
+build/
