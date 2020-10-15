@@ -3,58 +3,55 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to gtrending's documentation!
-=====================================
+Welcome to imessage_reader's documentation!
+=============================================
 
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
 
-Lightweight and easy-to-use python library for fetching
-trending repositories and developers. Relies on
-`github-trending-api
-<https://github.com/huchenme/github-trending-api>`_
-which is in JavaScript, so gtrending aims to fill the gap
-for python.
+A python library for fetching data from the chat.db database on macOS.
 
-Simple example, fetching the trending python projects and
-display their full names::
+To fetch users and messages use the following code::
 
-    from gtrending import fetch_repos
+    from imessage_reader import fetch_data
 
-    repos = fetch_repos(language="python")  # get the result as a dict
+    data = fetch_data.FetchData()  # create an instance
+    fetched_messages = data.get_messages()  # get the result as a list
 
-    for repo in repos:
-        print(repo["fullname"])  # full name (user/repo) of each repo
+You will retrieve a list with tuples containing a user id with the message.
 
+Use imessage_reader on the command line with following command::
+
+   imessage_reader  # show users and messages on the command line
+   imessage_reader -e  # additionally, export data to Excel
+   imessage_reader -v  # show version and license
 
 Features
 --------
 
-- Fetching repos/developers by language, and time range
-- Fast and efficient
-- returns complete data
-- pytest-ed
+- Fetching users and imessages
+- Can also be used on the command line
 
 
 Installation
 ------------
 
-Install gtrending by running::
+Install imessage_reader by running::
 
-    pip install gtrending
+    pip install imessage_reader
 
 Contribute
 ----------
 
-- Issue Tracker: https://github.com/hedythedev/gtrending/issues
-- Source Code: https://github.com/hedythedev/gtrending
+- Issue Tracker: https://github.com/niftycode/imessage_reader/issues
+- Source Code: https://github.com/niftycode/imessage_reader
 
 Support
 -------
 
-If you are having issues, please raise an issue on github.
+If you have a comment or find a bug, please leave an issue on Github.
 
 
 License
