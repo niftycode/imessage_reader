@@ -10,16 +10,28 @@ Received messages (iMessage or SMS) and attachments will be saved in "~/Library/
 
 ## Requirements
 
-* **Python 3.9**
+* **Python 3.8+**
 * pytest
 * openpyxl
 * setuptools
+
+## Install
+
+    pip3 install imessage_reader
 
 ## Usage
 
 Start the program with:
 
-    python3 imessage_reader.py
+    imessage_reader
+
+This will show you all users and messages.
+
+Use
+
+    imessage_reader.py -e
+
+to create an Excel file containing users and messages.
 
 **Note**: You need access to the *Library* folder in order to read the iMessage database file ("chat.db"). You can add access (for *Terminal* or *iTerm*) in
 
@@ -35,4 +47,4 @@ Start the program with:
 
 ## Changelog
 
-* October 8th, 2020: Added export to Excel
+see [CHANGELOG.rst](CHANGELOG.rst)
