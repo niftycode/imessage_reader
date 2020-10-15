@@ -1,17 +1,34 @@
+import io
 from setuptools import setup, find_packages
 
+with io.open('README.md', 'rt', encoding='utf8') as f:
+    LONG_DESC = f.read()
+
+VERSION = '0.0.1'
+
 setup(
-    name='src',
-    version='1.0.3',
+    name='imessage_reader',
+    version=VERSION,
     license='MIT',
     description='Fetch recipients and chat messages from the chat.db database.',
-
+    long_description=LONG_DESC,
+    long_description_content_type='text/markdown',
     author='Bodo Schönfeld',
     author_email='bodo.schoenfeld@niftycode.de',
     url='https://github.com/niftycode/imessage_reader',
 
-    packages=find_packages(exclude=('tests', 'docs')),
+    classifiers=[
+        'License :: OSI Approved :: MIT License',
+        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
+    ],
 
-    install_requires=['pytest'],
+    packages=find_packages(exclude=('tests', 'docs')),
+    python_requires='>=3.8',
+    entry_points={
+        'console_scripts': ['imessage_reader=imessage_reader.cli:main'],
+    },
+    install_requires=['openpyxl'],
     tests_require=['pytest'],
 )

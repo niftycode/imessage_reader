@@ -1,4 +1,6 @@
 .DS_Store
 /.vscode
-/src/__pycache__
+/imessage_reader/__pycache__
+imessage_reader.egg-info/
 /.idea
+dist/

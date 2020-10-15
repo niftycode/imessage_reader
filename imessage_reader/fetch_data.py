@@ -11,8 +11,8 @@ Date modified: October 13th, 2020
 
 
 from os.path import expanduser
-from src import common
-from src import write_excel
+from imessage_reader import common
+from imessage_reader import write_excel
 
 # The path to the iMessage database
 DB_PATH = expanduser("~") + '/Library/Messages/chat.db'
@@ -52,7 +52,6 @@ class Recipient:
         return f"{self.rowid}: {self.phone_id}"
 
 
-@iterable
 class MessageData:
     def __init__(self, user_id, text):
         """

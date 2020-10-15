@@ -2,18 +2,18 @@
 # -*- coding: utf-8 -*-
 
 """
-imessage_reader.py
-The main file with the entry point for this program.
+cli.py
+Entrypoint to the command line interface.
 Python 3.8+
 Author: niftycode
-Date created: June 14th, 2020
-Date modified: October 13th, 2020
+Date created: October 15th, 2020
+Date modified: -
 """
 
 import argparse
 import sys
-from src import info
-from src import fetch_data
+from imessage_reader import info
+from imessage_reader import fetch_data
 
 
 def get_parser():
