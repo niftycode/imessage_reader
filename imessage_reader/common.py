@@ -3,7 +3,7 @@
 
 """
 common.py
-Python 3.9+
+Python 3.8+
 Author: niftycode
 Date created: June 14th, 2020
 Date modified: October 1st, 2020

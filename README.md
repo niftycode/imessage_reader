@@ -1,6 +1,6 @@
 # imessage_reader
 
-![](img/license-MIT-green.svg) ![](img/python-3.6-blue.svg) ![](https://img.shields.io/github/last-commit/niftycode/imessage_reader.svg?style=flat) ![](https://img.shields.io/github/issues/niftycode/imessage_reader.svg?style=flat)
+![](img/license-MIT-green.svg) ![](img/python-3.8-blue.svg) ![](https://img.shields.io/github/last-commit/niftycode/imessage_reader.svg?style=flat) ![](https://img.shields.io/github/issues/niftycode/imessage_reader.svg?style=flat)
 
 This is a forensic tool written in Python 3. Use this tool to fetch the content (phone numbers, email addresses and messages) from the *chat.db* database file on **macOS** (version 10.14 or above).
 
@@ -10,16 +10,28 @@ Received messages (iMessage or SMS) and attachments will be saved in "~/Library/
 
 ## Requirements
 
-* **Python 3.9**
+* **Python 3.8+**
 * pytest
 * openpyxl
 * setuptools
+
+## Install
+
+    pip3 install imessage_reader
 
 ## Usage
 
 Start the program with:
 
-    python3 imessage_reader.py
+    imessage_reader
+
+This will show you all users and messages.
+
+Use
+
+    imessage_reader.py -e
+
+to create an Excel file containing users and messages.
 
 **Note**: You need access to the *Library* folder in order to read the iMessage database file ("chat.db"). You can add access (for *Terminal* or *iTerm*) in
 
@@ -35,4 +47,4 @@ Start the program with:
 
 ## Changelog
 
-* October 8th, 2020: Added export to Excel
+see [CHANGELOG.rst](CHANGELOG.rst)

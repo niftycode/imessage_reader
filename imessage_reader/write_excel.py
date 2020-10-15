@@ -4,7 +4,7 @@
 
 """
 Write Excel file containing iMessage data (user id, text)
-Python 3.9+
+Python 3.8+
 Date created: October 1st, 2020
 Date modified: October 8th, 2020
 """
@@ -14,9 +14,10 @@ from openpyxl.styles import Font
 from os.path import expanduser
 
 
-class ExelWriter:
+EXCEL_FILE_PATH = expanduser("~") + '/Desktop/'
 
-    EXCEL_FILE_PATH = expanduser("~") + '/Desktop/'
+
+class ExelWriter:
 
     def __init__(self, imessage_data: list):
         """
@@ -71,6 +72,7 @@ class ExelWriter:
             messages_row += 1
 
         # Save the workbook (excel file)
-        workbook.save(self.EXCEL_FILE_PATH + 'iMessage-Data.xlsx')
+        # TODO: Create file name with date
+        workbook.save(EXCEL_FILE_PATH + 'iMessage-Data.xlsx')
 
         print("Excel file successfully created!")
