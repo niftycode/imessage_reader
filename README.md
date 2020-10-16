@@ -8,10 +8,13 @@ This is a forensic tool written in Python 3. Use this tool to fetch the content 
 
 Received messages (iMessage or SMS) and attachments will be saved in "~/Library/Messages". This directory contains a "chat.db" file (SQLite3) with two tables of interest: *handle* and *message*. The *handle* table contains the recipients (email address or phone number). The received messages are in the *message* table.
 
+## Note
+
+Since the imessage databases are only available under macos, it makes no sense to use this tool under Windows or Linux.
+
 ## Requirements
 
 * **Python 3.8+**
-* pytest
 * openpyxl
 * setuptools
 
@@ -31,7 +34,7 @@ Use
 
     imessage_reader.py -e
 
-to create an Excel file containing users and messages.
+to create an Excel file containing users and messages. The file will be stored in the Desktop folder.
 
 **Note**: You need access to the *Library* folder in order to read the iMessage database file ("chat.db"). You can add access (for *Terminal* or *iTerm*) in
 
@@ -39,6 +42,7 @@ to create an Excel file containing users and messages.
 
 ## ToDo
 
+* Get the date of messages
 * Fetch the date of received messages.
 * Show a list of all known recipients.
 * Did the user receive the message via SMS or via iMessage?
@@ -47,4 +51,4 @@ to create an Excel file containing users and messages.
 
 ## Changelog
 
-see [CHANGELOG.rst](CHANGELOG.rst)
+see [CHANGELOG.rst](https://github.com/niftycode/imessage_reader/blob/master/CHANGELOG.rst)
