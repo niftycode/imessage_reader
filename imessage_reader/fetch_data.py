@@ -15,8 +15,13 @@ from os.path import expanduser
 from imessage_reader import common
 from imessage_reader import write_excel
 
+
 # The path to the iMessage database
 DB_PATH = expanduser("~") + '/Library/Messages/chat.db'
+
+# The SQL command
+SQL_CMD = "SELECT message.text, handle.id, handle.service " \
+              "FROM message JOIN handle on message.handle_id=handle.ROWID"
 
 
 @dataclass
@@ -43,14 +48,17 @@ class FetchData:
     """
     This class contains the methods for fetch, print and export the messages.
     """
+    def __init__(self, db_path=None, sql_cmd=None):
+        self.db_path = DB_PATH
+        self.sql_cmd = SQL_CMD
+
     def read_database(self) -> list:
         """
         Fetch data from the database and store the data in a list.
         :return: List containing the user id and the message
         """
-        sql_command = "SELECT message.text, handle.id, handle.service" \
-                      " FROM message JOIN handle on message.handle_id=handle.ROWID"
-        rval = common.fetch_db_data(DB_PATH, sql_command)
+
+        rval = common.fetch_db_data(self.db_path, self.sql_cmd)
 
         data = []
         for row in rval:
