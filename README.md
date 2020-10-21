@@ -10,19 +10,18 @@ Received messages (iMessage or SMS) and attachments will be saved in "~/Library/
 
 ## Note
 
-Since the imessage databases are only available under macos, it makes no sense to use this tool under Windows or Linux.
+Since the iMessage database is only available under macOS, it makes no sense to use this tool under Windows or Linux.
 
 ## Requirements
 
 * **Python 3.8+**
 * openpyxl
-* setuptools
 
 ## Install
 
     pip3 install imessage_reader
 
-## Usage
+## Usage (CLI)
 
 Start the program with:
 
@@ -40,12 +39,27 @@ to create an Excel file containing users and messages. The file will be stored i
 
     > System Preferences > Security & Privacy > Privacy > Full Disk Access
 
+## Usage (import module)
+
+To get the messages use following code:
+
+    from imessage_reader import fetch_data
+
+    # Create a FetchData instance
+    fd = fetch_data.FetchData()
+
+    # Store messages in my_data
+    # This is a list of tuples containing user id, message and service.
+    # service -> iMessage or SMS
+    my_data = fd.get_messages()
+    print(my_data)
+
 ## ToDo
 
 * Get the date of messages
 * Fetch the date of received messages.
 * Show a list of all known recipients.
-* Did the user receive the message via SMS or via iMessage?
+* ~~Did the user receive the message via SMS or via iMessage?~~
 * Show attachments.
 * Add more tests.
 

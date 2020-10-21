@@ -34,4 +34,5 @@ def initialize_db(tmpdir):
 def test_fetch_db_data(initialize_db):
     sql_command = "SELECT ROWID, id from handle"
     rval = common.fetch_db_data(initialize_db, sql_command)
+    assert isinstance(rval, object)
     assert rval == [(8, 'max@mustermann.de')]

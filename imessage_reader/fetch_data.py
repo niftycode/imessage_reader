@@ -6,10 +6,11 @@ Fetch data, print data and export data to excel.
 Python 3.8+
 Author: niftycode
 Date created: October 8th, 2020
-Date modified: October 16th, 2020
+Date modified: October 19th, 2020
 """
 
 
+from dataclasses import dataclass
 from os.path import expanduser
 from imessage_reader import common
 from imessage_reader import write_excel
@@ -18,26 +19,23 @@ from imessage_reader import write_excel
 DB_PATH = expanduser("~") + '/Library/Messages/chat.db'
 
 
+@dataclass
 class MessageData:
     """
-    This class is the store for the messages.
+    This dataclass is the store for the data
+    (user id, message, imessage or sms service).
     """
-    def __init__(self, user_id, text, service):
-        """
-        init function of this class
-        :param user_id: The user id used in iMessage (mobile or email)
-        :param text: The user's message
-        :param service: SMS or iMessage
-        """
-        self.user_id = user_id
-        self.text = text
-        self.service = service
+    user_id: str
+    text: str
+    service: str
 
     def __str__(self):
         """
         :return: String representation of this object
         """
-        return f"user id: {self.user_id}:\nmessage: {self.text}\nservice: {self.service}\n"
+        return f"user id: {self.user_id}:\n" \
+               f"message: {self.text}\n" \
+               f"service: {self.service}\n"
 
 
 # noinspection PyMethodMayBeStatic
@@ -87,8 +85,8 @@ class FetchData:
 
     def get_messages(self) -> list:
         """
-        Create a list with tuples (user id, message)
-        :return: List with tuples (user id, message)
+        Create a list with tuples (user id, message, service)
+        :return: List with tuples (user id, message, service)
         """
         fetched_data = self.read_database()
 
@@ -101,6 +99,6 @@ class FetchData:
             messages.append(data.text)
             service.append(data.service)
 
-        users_messages = list(zip(users, messages, service))
+        data = list(zip(users, messages, service))
 
-        return users_messages
+        return data

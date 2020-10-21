@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 with io.open('README.md', 'rt', encoding='utf8') as f:
     LONG_DESC = f.read()
 
-VERSION = '0.1.0'
+VERSION = '0.1.1'
 
 setup(
     name='imessage_reader',
@@ -16,6 +16,12 @@ setup(
     author='Bodo Schönfeld',
     author_email='bodo.schoenfeld@niftycode.de',
     url='https://github.com/niftycode/imessage_reader',
+    
+    project_urls=[
+        'Source Code = https://github.com/niftycode/imessage_reader',
+        'Bug Tracker = https://github.com/niftycode/imessage_reader/issues',
+        # 'Documentation = https://github.com/niftycode/imessage_reader/wiki',
+    ],
 
     classifiers=[
         'License :: OSI Approved :: MIT License',

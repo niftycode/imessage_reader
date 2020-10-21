@@ -11,3 +11,10 @@ Added/Updated
 
 - README.md
 - Now the type of service is also displayed
+
+[0.1.1]-2020-10-22
+-------------------
+Updated
+
+- README.md
+- MessageData is now a dataclass
