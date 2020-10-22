@@ -5,7 +5,6 @@ import pytest
 import os
 import sqlite3
 from imessage_reader import common
-from imessage_reader import fetch_data
 from imessage_reader.fetch_data import MessageData
 
 
@@ -16,7 +15,7 @@ def message_data_one_row():
 
 @pytest.fixture(scope='function')
 def initialize_db(tmpdir):
-    file = os.path.join(tmpdir.strpath, "chat.db")
+    file = os.path.join(tmpdir.strpath, 'chat.db')
     conn = sqlite3.connect(file)
     cur = conn.cursor()
 
@@ -44,18 +43,9 @@ def test_message_data(message_data_one_row):
 
 
 def test_db_data(initialize_db):
-    sql_command = "SELECT user_id, text, service from message"
+    sql_command = 'SELECT user_id, text, service from message'
     rval = common.fetch_db_data(initialize_db, sql_command)
     assert(isinstance(rval, list))
     assert(isinstance(rval[0][0], str))
     assert (isinstance(rval[0][1], str))
     assert (isinstance(rval[0][2], str))
-
-
-'''
-def test_read_database():
-    sql_command = "SELECT user_id, text, service from message"
-    fd = fetch_data.FetchData(initialize_db, sql_command)
-    rval = fd.read_database()
-    assert isinstance(rval, list)
-'''

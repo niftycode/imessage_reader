@@ -16,12 +16,6 @@ setup(
     author='Bodo Schönfeld',
     author_email='bodo.schoenfeld@niftycode.de',
     url='https://github.com/niftycode/imessage_reader',
-    
-    project_urls=[
-        'Source Code = https://github.com/niftycode/imessage_reader',
-        'Bug Tracker = https://github.com/niftycode/imessage_reader/issues',
-        # 'Documentation = https://github.com/niftycode/imessage_reader/wiki',
-    ],
 
     classifiers=[
         'License :: OSI Approved :: MIT License',

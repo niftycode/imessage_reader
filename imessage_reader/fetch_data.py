@@ -16,14 +16,6 @@ from imessage_reader import common
 from imessage_reader import write_excel
 
 
-# The path to the iMessage database
-DB_PATH = expanduser("~") + '/Library/Messages/chat.db'
-
-# The SQL command
-SQL_CMD = "SELECT message.text, handle.id, handle.service " \
-              "FROM message JOIN handle on message.handle_id=handle.ROWID"
-
-
 @dataclass
 class MessageData:
     """
@@ -48,17 +40,21 @@ class FetchData:
     """
     This class contains the methods for fetch, print and export the messages.
     """
-    def __init__(self, db_path=None, sql_cmd=None):
-        self.db_path = DB_PATH
-        self.sql_cmd = SQL_CMD
+
+    # The path to the iMessage database
+    DB_PATH = expanduser("~") + '/Library/Messages/chat.db'
+
+    # The SQL command
+    SQL_CMD = "SELECT message.text, handle.id, handle.service " \
+              "FROM message JOIN handle on message.handle_id=handle.ROWID"
 
     def read_database(self) -> list:
         """
         Fetch data from the database and store the data in a list.
-        :return: List containing the user id and the message
+        :return: List containing the user id, the message and the service
         """
 
-        rval = common.fetch_db_data(self.db_path, self.sql_cmd)
+        rval = common.fetch_db_data(self.DB_PATH, self.SQL_CMD)
 
         data = []
         for row in rval:
@@ -86,7 +82,7 @@ class FetchData:
         """
         Export data (write Excel file)
         This method is for CLI usage.
-        :param data: imessage objects containing user id and text
+        :param data: imessage objects containing user id, message and service
         """
         ew = write_excel.ExelWriter(data)
         ew.write_data()
