@@ -81,7 +81,7 @@ class ExelWriter:
         # Save the workbook (excel file)
         # TODO: Create file name with date
         try:
-            workbook.save(EXCEL_FILE_PATH + 'iMessage-Data.xlsx')
+            workbook.save(EXCEL_FILE_PATH + f'iMessage-Data_{datetime.now().strftime("%Y-%m-%d")}.xlsx')
             print()
             print(">>> Excel file successfully created! <<<")
             print("You find the Excel file in your Desktop folder.")
