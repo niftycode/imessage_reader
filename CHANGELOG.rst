@@ -18,3 +18,10 @@ Updated
 
 - README.md
 - MessageData is now a dataclass
+
+[0.1.2]-2020-10-24
+-------------------
+
+Updated
+
+- The generated Excel files now show the date.

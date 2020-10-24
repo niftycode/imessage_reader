@@ -6,10 +6,11 @@
 Write Excel file containing iMessage data (user id, text)
 Python 3.8+
 Date created: October 1st, 2020
-Date modified: October 8th, 2020
+Date modified: October 24th, 2020
 """
 
 import openpyxl
+from datetime import datetime
 from openpyxl.styles import Font
 from os.path import expanduser
 
