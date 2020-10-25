@@ -14,7 +14,7 @@ import sqlite3
 import sys
 
 
-def fetch_db_data(db, command):
+def fetch_db_data(db, command) -> list:
     """
     Send queries to the sqlite database and return the results.
     :param db: The path to the database.

@@ -16,6 +16,9 @@ from imessage_reader import common
 from imessage_reader import write_excel
 
 
+# EXCEL_FILE_PATH = expanduser("~") + '/Desktop/'
+
+
 @dataclass
 class MessageData:
     """
@@ -84,7 +87,8 @@ class FetchData:
         This method is for CLI usage.
         :param data: imessage objects containing user id, message and service
         """
-        ew = write_excel.ExelWriter(data)
+        file_path = expanduser("~") + '/Desktop/'
+        ew = write_excel.ExelWriter(data, file_path)
         ew.write_data()
 
     def get_messages(self) -> list:
