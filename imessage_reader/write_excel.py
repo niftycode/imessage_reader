@@ -12,22 +12,20 @@ Date modified: October 24th, 2020
 import openpyxl
 from datetime import datetime
 from openpyxl.styles import Font
-from os.path import expanduser
-
-
-EXCEL_FILE_PATH = expanduser("~") + '/Desktop/'
 
 
 class ExelWriter:
     """
     This class manages the export to excel.
     """
-    def __init__(self, imessage_data: list):
+    def __init__(self, imessage_data: list, file_path: str):
         """
         init function of this class
-        :param imessage_data: List with iMessage data objects containing user id, text and service
+        :param imessage_data: List with MessageData objects
+                containing user id, text and service
         """
         self.imessage_data = imessage_data
+        self.file_path = file_path
 
     def write_data(self):
         """
@@ -82,7 +80,7 @@ class ExelWriter:
         # Save the workbook (excel file)
         # TODO: Create file name with date
         try:
-            workbook.save(EXCEL_FILE_PATH + f'iMessage-Data_{datetime.now().strftime("%Y-%m-%d")}.xlsx')
+            workbook.save(self.file_path + f'iMessage-Data_{datetime.now().strftime("%Y-%m-%d")}.xlsx')
             print()
             print(">>> Excel file successfully created! <<<")
             print("You find the Excel file in your Desktop folder.")
