@@ -6,12 +6,32 @@ common.py
 Python 3.8+
 Author: niftycode
 Date created: June 14th, 2020
-Date modified: October 1st, 2020
+Date modified: October 27th, 2020
 """
 
 
 import sqlite3
 import sys
+import enum
+import platform
+
+
+class Platform(enum.Enum):
+    OTHER = 0
+    LINUX = 1
+    MAC = 2
+    WINDOWS = 3
+
+
+def get_platform():
+    system = platform.system()
+    if system == 'Linux':
+        return Platform.LINUX
+    if system == 'Darwin':
+        return Platform.MAC
+    if system == 'Windows':
+        return Platform.WINDOWS
+    raise NotImplementedError(f"Platform {system} is not supported yet!")
 
 
 def fetch_db_data(db, command) -> list:
