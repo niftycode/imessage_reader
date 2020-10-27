@@ -50,7 +50,7 @@ class FetchData:
             self.operating_system = common.get_platform()
 
     def check_system(self):
-        if self.operating_system != common.Platform.MAC:
+        if self.operating_system != 'MAC':
             sys.exit("Your operating system is not supported yet!")
 
     # The path to the iMessage database
@@ -80,6 +80,7 @@ class FetchData:
         :param export: Determine whether to export data
         """
 
+        # Check the running operating system
         self.check_system()
 
         fetched_data = self.read_database()
