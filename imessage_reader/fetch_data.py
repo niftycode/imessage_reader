@@ -10,6 +10,7 @@ Date modified: October 19th, 2020
 """
 
 
+import sys
 from dataclasses import dataclass
 from os.path import expanduser
 from imessage_reader import common
@@ -44,6 +45,14 @@ class FetchData:
     This class contains the methods for fetch, print and export the messages.
     """
 
+    def __init__(self, system=None):
+        if system is None:
+            self.operating_system = common.get_platform()
+
+    def check_system(self):
+        if self.operating_system != common.Platform.MAC:
+            sys.exit("Your operating system is not supported yet!")
+
     # The path to the iMessage database
     DB_PATH = expanduser("~") + '/Library/Messages/chat.db'
 
@@ -70,6 +79,8 @@ class FetchData:
         This method is for CLI usage.
         :param export: Determine whether to export data
         """
+
+        self.check_system()
 
         fetched_data = self.read_database()
 
