@@ -12,25 +12,32 @@ Date modified: October 27th, 2020
 
 import sqlite3
 import sys
-import enum
 import platform
+from enum import Enum
 
 
-class Platform(enum.Enum):
+class Platform(Enum):
+    """
+    An enum used to indicate the system's operating system
+    """
     OTHER = 0
     LINUX = 1
     MAC = 2
     WINDOWS = 3
 
 
-def get_platform():
+def get_platform() -> str:
+    """
+    Get the current operating system.
+    :return: The operating system this program is running on
+    """
     system = platform.system()
     if system == 'Linux':
-        return Platform.LINUX
+        return str(Platform.LINUX.name)
     if system == 'Darwin':
-        return Platform.MAC
+        return str(Platform.MAC.name)
     if system == 'Windows':
-        return Platform.WINDOWS
+        return str(Platform.WINDOWS.name)
     raise NotImplementedError(f"Platform {system} is not supported yet!")
 
 

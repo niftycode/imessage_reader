@@ -11,7 +11,6 @@ Date modified: -
 """
 
 import argparse
-import sys
 from imessage_reader import info
 from imessage_reader import fetch_data
 
@@ -28,8 +27,6 @@ def get_parser():
                         help='Show the current version.',
                         action='store_true')
 
-    # args = parser.parse_args()
-    # return args
     return parser
 
 
@@ -55,8 +52,6 @@ def main():
     parser = get_parser()
     args = parser.parse_args()
     evaluate(args)
-    # args = get_parser()
-    # sys.stdout.write(str(evaluate(args)))
 
 
 if __name__ == '__main__':

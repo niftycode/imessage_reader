@@ -25,3 +25,9 @@ Updated
 Updated
 
 - The generated Excel files now show the date.
+
+[0.1.3]-2020-10-30
+-------------------
+
+- Now the date is also read
+- Refactored CLI
