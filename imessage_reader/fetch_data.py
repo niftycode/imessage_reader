@@ -6,7 +6,7 @@ Fetch data, print data and export data to excel.
 Python 3.8+
 Author: niftycode
 Date created: October 8th, 2020
-Date modified: October 19th, 2020
+Date modified: October 27th, 2020
 """
 
 
@@ -17,9 +17,6 @@ from imessage_reader import common
 from imessage_reader import write_excel
 
 
-# EXCEL_FILE_PATH = expanduser("~") + '/Desktop/'
-
-
 @dataclass
 class MessageData:
     """
@@ -28,6 +25,7 @@ class MessageData:
     """
     user_id: str
     text: str
+    date: int
     service: str
 
     def __str__(self):
@@ -36,6 +34,7 @@ class MessageData:
         """
         return f"user id: {self.user_id}:\n" \
                f"message: {self.text}\n" \
+               f"date: {self.date}\n" \
                f"service: {self.service}\n"
 
 
@@ -57,8 +56,13 @@ class FetchData:
     DB_PATH = expanduser("~") + '/Library/Messages/chat.db'
 
     # The SQL command
-    SQL_CMD = "SELECT message.text, handle.id, handle.service " \
-              "FROM message JOIN handle on message.handle_id=handle.ROWID"
+    SQL_CMD = "SELECT " \
+              "text, " \
+              "datetime((date / 1000000000) + 978307200, 'unixepoch', 'localtime')," \
+              "handle.id, " \
+              "handle.service " \
+              "FROM message " \
+              "JOIN handle on message.handle_id=handle.ROWID"
 
     def read_database(self) -> list:
         """
@@ -70,7 +74,7 @@ class FetchData:
 
         data = []
         for row in rval:
-            data.append(MessageData(row[1], row[0], row[2]))
+            data.append(MessageData(row[2], row[0], row[1], row[3]))
         return data
 
     def show_user_txt(self, export: bool):
@@ -83,6 +87,7 @@ class FetchData:
         # Check the running operating system
         self.check_system()
 
+        # Read chat.db
         fetched_data = self.read_database()
 
         # CLI output
@@ -112,13 +117,15 @@ class FetchData:
 
         users = []
         messages = []
+        dates = []
         service = []
 
         for data in fetched_data:
             users.append(data.user_id)
             messages.append(data.text)
+            dates.append(data.date)
             service.append(data.service)
 
-        data = list(zip(users, messages, service))
+        data = list(zip(users, messages, dates, service))
 
         return data

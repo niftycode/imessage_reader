@@ -57,7 +57,7 @@ To get the messages use following code:
 ## ToDo
 
 * Get the date of messages
-* Fetch the date of received messages.
+* ~~Fetch the date of received messages.~~
 * Show a list of all known recipients.
 * ~~Did the user receive the message via SMS or via iMessage?~~
 * Show attachments.
