@@ -25,7 +25,7 @@ class MessageData:
     """
     user_id: str
     text: str
-    date: int
+    date: str
     service: str
 
     def __str__(self):
@@ -44,14 +44,6 @@ class FetchData:
     This class contains the methods for fetch, print and export the messages.
     """
 
-    def __init__(self, system=None):
-        if system is None:
-            self.operating_system = common.get_platform()
-
-    def check_system(self):
-        if self.operating_system != 'MAC':
-            sys.exit("Your operating system is not supported yet!")
-
     # The path to the iMessage database
     DB_PATH = expanduser("~") + '/Library/Messages/chat.db'
 
@@ -63,6 +55,14 @@ class FetchData:
               "handle.service " \
               "FROM message " \
               "JOIN handle on message.handle_id=handle.ROWID"
+
+    def __init__(self, system=None):
+        if system is None:
+            self.operating_system = common.get_platform()
+
+    def check_system(self):
+        if self.operating_system != 'MAC':
+            sys.exit("Your operating system is not supported yet!")
 
     def read_database(self) -> list:
         """
