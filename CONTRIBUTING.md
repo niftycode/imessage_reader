@@ -26,6 +26,6 @@ If you find any bugs, be sure to open up an issue. You can also send me an email
 - Fork the repository.
 - Work on the master branch for smaller patches or create a **separate branch for new features**.
 - Make changes, `git add` and then commit. You can link to the issue number in the commit message (optional).
-- (Optional) Run `flake8` and `pytets`.
+- (Optional) Run `flake8` and `pytest`.
 - (Optional) If you're updating the documentation, make sure you update `docs/index.rst` and `README.md` simultaneously.
 - Use the GitHub website to create a Pull Request (PR) and wait for the maintainers to review it.
