@@ -61,11 +61,11 @@ class FetchData:
         if system is None:
             self.operating_system = common.get_platform()
 
-    def check_system(self):
+    def _check_system(self):
         if self.operating_system != 'MAC':
             sys.exit("Your operating system is not supported yet!")
 
-    def read_database(self) -> list:
+    def _read_database(self) -> list:
         """
         Fetch data from the database and store the data in a list.
         :return: List containing the user id, the message and the service
@@ -86,10 +86,10 @@ class FetchData:
         """
 
         # Check the running operating system
-        self.check_system()
+        self._check_system()
 
         # Read chat.db
-        fetched_data = self.read_database()
+        fetched_data = self._read_database()
 
         # CLI output
         for data in fetched_data:
@@ -97,39 +97,37 @@ class FetchData:
 
         # Excel export
         if export == 'excel':
-            self.export_excel(fetched_data)
+            self._export_excel(fetched_data)
 
         # SQLite3 export
         if export == 'sqlite':
-            self.export_sqlite(fetched_data)
+            self._export_sqlite(fetched_data)
 
-    def export_excel(self, data: list):
+    def _export_excel(self, data: list):
         """
         Export data (write Excel file)
-        This method is for CLI usage.
         :param data: imessage objects containing user id, message and service
         """
         file_path = expanduser("~") + '/Desktop/'
         ew = write_excel.ExelWriter(data, file_path)
         ew.write_data()
 
-    def export_sqlite(self, data: list):
+    def _export_sqlite(self, data: list):
         """
         Export data (create SQLite3 database)
-        This method is for CLI usage.
         :param data: imessage objects containig user id, message and service
         """
         file_path = expanduser("~") + '/Desktop/'
         cd = create_sqlite.CreateDatabase(data, file_path)
         cd.create_sqlite_db()
 
-    '''
     def get_messages(self) -> list:
         """
-        Create a list with tuples (user id, message, service)
-        :return: List with tuples (user id, message, service)
+        Create a list with tuples (user id, message, date, service)
+        This method is for CLI usage.
+        :return: List with tuples (user id, message, date, service)
         """
-        fetched_data = self.read_database()
+        fetched_data = self._read_database()
 
         users = []
         messages = []
@@ -145,4 +143,3 @@ class FetchData:
         data = list(zip(users, messages, dates, service))
 
         return data
-    '''
