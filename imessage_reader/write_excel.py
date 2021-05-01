@@ -3,7 +3,7 @@
 
 
 """
-Write Excel file containing iMessage data (user id, text)
+Write Excel file containing iMessage data (user id, text, date, service)
 Python 3.8+
 Date created: October 1st, 2020
 Date modified: October 27th, 2020
@@ -22,7 +22,8 @@ class ExelWriter:
         """
         init function of this class
         :param imessage_data: List with MessageData objects
-                containing user id, text and service
+                containing user id, text, date and service
+        :param file_path: The path to the loaction of the Excel file
         """
         self.imessage_data = imessage_data
         self.file_path = file_path

@@ -31,9 +31,15 @@ This will show you all users and messages.
 
 Use
 
-    imessage_reader.py -e
+    imessage_reader -e
 
-to create an Excel file containing users and messages. The file will be stored in the Desktop folder.
+to create an Excel file containing users, messages, date and service (SMS or iMessage). The file will be stored in the Desktop folder.
+
+Use
+
+    imessage_reader -s
+
+to create a SQLite3 database containing users, messages, date and service (SMS or iMessage). The file will be stored in the Desktop folder.
 
 **Note**: You need access to the *Library* folder in order to read the iMessage database file ("chat.db"). You can add access (for *Terminal* or *iTerm*) in
 
@@ -56,10 +62,11 @@ To get the messages use following code:
 
 ## ToDo
 
-* Get the date of messages
+* ~~Get the date of messages~~
 * ~~Fetch the date of received messages.~~
 * Show a list of all known recipients.
 * ~~Did the user receive the message via SMS or via iMessage?~~
+* ~~Create SQLite3 database.~~
 * Show attachments.
 * Add more tests.
 

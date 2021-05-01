@@ -1,0 +1,47 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+"""
+Create a SQLite3 database containing iMessage data (user id, text, date, service)
+Python 3.8+
+Author: niftycode
+Date created: April 30th, 2021
+Date modified: -
+"""
+
+import sqlite3
+
+
+class CreateDatabase:
+    """This class manages the export to SQLite"""
+    def __init__(self, imessage_data: list, file_path: str):
+        """
+        init function of this class
+        :param imessage_data: List with MessageData objects
+                containing user id, text, date and service
+        :param file_path: The path to the loaction of the Excel file
+        """
+        self.imessage_data = imessage_data
+        self.file_path = file_path
+
+    def create_sqlite_db(self):
+        """
+        Create a SQLite3 database in the Desktop folder.
+        Add user, text, date and service to the databse.
+        """
+        database = self.file_path + 'iMessage-Data.sqlite'
+
+        conn = sqlite3.connect(database)
+        cur = conn.cursor()
+
+        cur.execute('DROP TABLE IF EXISTS Messages')
+
+        cur.execute('''
+        CREATE TABLE IF NOT EXISTS Messages (user TEXT, text TEXT, date TEXT, service TEXT)''')
+
+        for data in self.imessage_data:
+            cur.execute('''INSERT INTO Messages (user, text, date, service)
+                VALUES(?, ?, ?, ?)''', (data.user_id, data.text, data.date, data.service))
+
+        conn.commit()
+        cur.close()

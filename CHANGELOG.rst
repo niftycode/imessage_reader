@@ -21,7 +21,6 @@ Updated
 
 [0.1.2]-2020-10-24
 -------------------
-
 Updated
 
 - The generated Excel files now show the date.
@@ -31,3 +30,8 @@ Updated
 
 - Now the date is also read
 - Refactored CLI
+
+[0.1.4]-2021-05-02
+-------------------
+
+- New option: Create a SQLite3 database containing the messages.

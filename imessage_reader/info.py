@@ -7,10 +7,10 @@ App info, license, version
 Python 3.8+
 Author: niftycode
 Date created: June 14th, 2020
-Date modified: October 24th, 2020
+Date modified: April 30th, 2021
 """
 
-VERSION = '0.1.3'
+VERSION = '0.1.4'
 
 
 def app_info():

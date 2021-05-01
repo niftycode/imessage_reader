@@ -7,7 +7,7 @@ Entrypoint to the command line interface.
 Python 3.8+
 Author: niftycode
 Date created: October 15th, 2020
-Date modified: -
+Date modified: April 30th, 2021
 """
 
 import argparse
@@ -23,6 +23,10 @@ def get_parser():
                         help='Create Excel file containing user id and messages.',
                         action='store_true')
 
+    parser.add_argument('-s', '--sqlite',
+                        help='Create a SQLite3 database',
+                        action='store_true')
+
     parser.add_argument('-v', '--version',
                         help='Show the current version.',
                         action='store_true')
@@ -32,16 +36,18 @@ def get_parser():
 
 def evaluate(args):
     """
-    It parses arguments from sys.argv and performs the appropriate actions.
+    Parse arguments from sys.argv and perform the appropriate actions.
     :param args: The user's input
     """
     data = fetch_data.FetchData()
     if args.version:
         info.app_info()
     elif args.excel:
-        data.show_user_txt(True)
+        data.show_user_txt('excel')
+    elif args.sqlite:
+        data.show_user_txt('sqlite')
     else:
-        data.show_user_txt(False)
+        data.show_user_txt('nothing')
 
 
 def main():

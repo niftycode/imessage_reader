@@ -15,6 +15,7 @@ from dataclasses import dataclass
 from os.path import expanduser
 from imessage_reader import common
 from imessage_reader import write_excel
+from imessage_reader import create_sqlite
 
 
 @dataclass
@@ -77,7 +78,7 @@ class FetchData:
             data.append(MessageData(row[2], row[0], row[1], row[3]))
         return data
 
-    def show_user_txt(self, export: bool):
+    def show_user_txt(self, export: str):
         """
         Call fetch_message_data() method, print fetched data and export data.
         This method is for CLI usage.
@@ -95,10 +96,14 @@ class FetchData:
             print(data)
 
         # Excel export
-        if export is True:
-            self.export_data(fetched_data)
+        if export == 'excel':
+            self.export_excel(fetched_data)
 
-    def export_data(self, data: list):
+        # SQLite3 export
+        if export == 'sqlite':
+            self.export_sqlite(fetched_data)
+
+    def export_excel(self, data: list):
         """
         Export data (write Excel file)
         This method is for CLI usage.
@@ -108,6 +113,17 @@ class FetchData:
         ew = write_excel.ExelWriter(data, file_path)
         ew.write_data()
 
+    def export_sqlite(self, data: list):
+        """
+        Export data (create SQLite3 database)
+        This method is for CLI usage.
+        :param data: imessage objects containig user id, message and service
+        """
+        file_path = expanduser("~") + '/Desktop/'
+        cd = create_sqlite.CreateDatabase(data, file_path)
+        cd.create_sqlite_db()
+
+    '''
     def get_messages(self) -> list:
         """
         Create a list with tuples (user id, message, service)
@@ -129,3 +145,4 @@ class FetchData:
         data = list(zip(users, messages, dates, service))
 
         return data
+    '''
