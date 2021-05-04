@@ -118,8 +118,8 @@ class FetchData:
         :param data: imessage objects containig user id, message and service
         """
         file_path = expanduser("~") + '/Desktop/'
-        cd = create_sqlite.CreateDatabase(data, file_path)
-        cd.create_sqlite_db()
+        cdb = create_sqlite.CreateDatabase(data, file_path)
+        cdb.create_sqlite_db()
 
     def get_messages(self) -> list:
         """
