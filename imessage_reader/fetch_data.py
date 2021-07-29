@@ -28,6 +28,7 @@ class MessageData:
     text: str
     date: str
     service: str
+    last_addressed_handle: str
 
     def __str__(self):
         """
@@ -36,7 +37,8 @@ class MessageData:
         return f"user id: {self.user_id}:\n" \
                f"message: {self.text}\n" \
                f"date: {self.date}\n" \
-               f"service: {self.service}\n"
+               f"service: {self.service}\n"\
+               f"account: {self.last_addressed_handle}\n"
 
 
 # noinspection PyMethodMayBeStatic
@@ -53,9 +55,11 @@ class FetchData:
               "text, " \
               "datetime((date / 1000000000) + 978307200, 'unixepoch', 'localtime')," \
               "handle.id, " \
-              "handle.service " \
+              "handle.service, " \
+              "chat.last_addressed_handle "\
               "FROM message " \
-              "JOIN handle on message.handle_id=handle.ROWID"
+              "JOIN handle on message.handle_id=handle.ROWID "\
+              "JOIN chat on message.handle_id=chat.ROWID"
 
     def __init__(self, system=None):
         if system is None:
@@ -75,7 +79,7 @@ class FetchData:
 
         data = []
         for row in rval:
-            data.append(MessageData(row[2], row[0], row[1], row[3]))
+            data.append(MessageData(row[2], row[0], row[1], row[3],row[4]))
         return data
 
     def show_user_txt(self, export: str):
@@ -118,8 +122,8 @@ class FetchData:
         :param data: imessage objects containig user id, message and service
         """
         file_path = expanduser("~") + '/Desktop/'
-        cdb = create_sqlite.CreateDatabase(data, file_path)
-        cdb.create_sqlite_db()
+        cd = create_sqlite.CreateDatabase(data, file_path)
+        cd.create_sqlite_db()
 
     def get_messages(self) -> list:
         """
@@ -133,13 +137,15 @@ class FetchData:
         messages = []
         dates = []
         service = []
+        account = []
 
         for data in fetched_data:
             users.append(data.user_id)
             messages.append(data.text)
             dates.append(data.date)
             service.append(data.service)
+            account.append(data.last_addressed_handle)
 
-        data = list(zip(users, messages, dates, service))
+        data = list(zip(users, messages, dates, service, account))
 
         return data
