@@ -14,9 +14,8 @@ Date modified: July 29, 2021
 import sys
 from dataclasses import dataclass
 from os.path import expanduser
-from imessage_reader import common
-from imessage_reader import write_excel
-from imessage_reader import create_sqlite
+
+from imessage_reader import common, create_sqlite, write_excel
 
 
 @dataclass
@@ -29,7 +28,7 @@ class MessageData:
     text: str
     date: str
     service: str
-    last_addressed_handle: str
+    account: str
 
     def __str__(self):
         """
@@ -39,7 +38,7 @@ class MessageData:
                f"message: {self.text}\n" \
                f"date: {self.date}\n" \
                f"service: {self.service}\n"\
-               f"account: {self.destination_caller_id}\n"
+               f"account: {self.account}\n"
 
 
 # noinspection PyMethodMayBeStatic
@@ -72,14 +71,14 @@ class FetchData:
     def _read_database(self) -> list:
         """
         Fetch data from the database and store the data in a list.
-        :return: List containing the user id, the message and the service
+        :return: List containing the user id, messages, the service and the account
         """
 
         rval = common.fetch_db_data(self.DB_PATH, self.SQL_CMD)
 
         data = []
         for row in rval:
-            data.append(MessageData(row[2], row[0], row[1], row[3],row[4]))
+            data.append(MessageData(row[2], row[0], row[1], row[3], row[4]))
         return data
 
     def show_user_txt(self, export: str):
@@ -119,7 +118,7 @@ class FetchData:
     def _export_sqlite(self, data: list):
         """
         Export data (create SQLite3 database)
-        :param data: imessage objects containig user id, message and service
+        :param data: imessage objects containig user id, message, service, account
         """
         file_path = expanduser("~") + '/Desktop/'
         cd = create_sqlite.CreateDatabase(data, file_path)
@@ -127,9 +126,9 @@ class FetchData:
 
     def get_messages(self) -> list:
         """
-        Create a list with tuples (user id, message, date, service)
+        Create a list with tuples (user id, message, date, service, account)
         This method is for CLI usage.
-        :return: List with tuples (user id, message, date, service)
+        :return: List with tuples (user id, message, date, service, account)
         """
         fetched_data = self._read_database()
 

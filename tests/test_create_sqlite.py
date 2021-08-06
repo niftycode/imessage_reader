@@ -17,7 +17,8 @@ def message_data_one_row():
     message_data_list = [MessageData(user_id='max.mustermann@icloud.com',
                                      text='Hello Max!',
                                      date='2021-04-11 17:02:34',
-                                     service='iMessage')]
+                                     service='iMessage',
+                                     account='+01 555 17172')]
     return message_data_list
 
 

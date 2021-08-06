@@ -2,7 +2,7 @@
 
 ![](img/license-MIT-green.svg) ![](img/python-3.8-blue.svg) ![](https://img.shields.io/github/last-commit/niftycode/imessage_reader.svg?style=flat) ![](https://img.shields.io/github/issues/niftycode/imessage_reader.svg?style=flat) ![](https://img.shields.io/travis/niftycode/imessage_reader/master) ![](https://img.shields.io/pypi/v/imessage_reader)
 
-This is a forensic tool written in Python 3. Use this tool to fetch the content (phone numbers, email addresses and messages) from the *chat.db* database file on **macOS** (version 10.14 or above).
+This is a forensic tool written in Python 3. Use this tool to fetch the content (phone numbers, email addresses, messages and the account) from the *chat.db* database file on **macOS** (version 10.14 or above).
 
 ## Background
 

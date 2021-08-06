@@ -23,7 +23,7 @@ copyright = "2020, Bodo Schönfeld"
 author = "Bodo Schönfeld"
 
 # The full version, including alpha/beta/rc tags
-release = "0.1.1"
+release = "0.2.0"
 
 
 # -- General configuration ---------------------------------------------------

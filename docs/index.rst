@@ -40,7 +40,8 @@ Installation
 
 Install imessage_reader by running::
 
-    pip install imessage_reader
+    pip install imessage_reader  // Windows
+    pip3 install imessage_reader // Linux & macOS
 
 Contribute
 ----------

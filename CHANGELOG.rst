@@ -35,3 +35,8 @@ Updated
 -------------------
 
 - New option: Create a SQLite3 database containing the messages.
+
+[0.2.0]-2021-07-29
+-------------------
+
+- New feature added by thecircleisround: Fetch account info
