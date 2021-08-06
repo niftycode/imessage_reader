@@ -3,14 +3,15 @@
 
 
 """
-Write Excel file containing iMessage data (user id, text, date, service)
+Write Excel file containing iMessage data (user id, text, date, service, account)
 Python 3.8+
 Date created: October 1st, 2020
-Date modified: October 27th, 2020
+Date modified: August 6th, 2021
 """
 
-import openpyxl
 from datetime import datetime
+
+import openpyxl
 from openpyxl.styles import Font
 
 
@@ -18,11 +19,12 @@ class ExelWriter:
     """
     This class manages the export to excel.
     """
+
     def __init__(self, imessage_data: list, file_path: str):
         """
         init function of this class
         :param imessage_data: List with MessageData objects
-                containing user id, text, date and service
+                containing user id, text, date, service and account
         :param file_path: The path to the loaction of the Excel file
         """
         self.imessage_data = imessage_data
@@ -30,19 +32,21 @@ class ExelWriter:
 
     def write_data(self):
         """
-        Write data (user id, text, date, service) to Excel
+        Write data (user id, text, date, service, account) to Excel
         """
 
         users = []
         messages = []
         dates = []
         services = []
+        accounts = []
 
         for data in self.imessage_data:
             users.append(data.user_id)
             messages.append(data.text)
             dates.append(data.date)
             services.append(data.service)
+            accounts.append(data.account)
 
         # Call openpyxl.Workbook() to create a new blank Excel workbook
         workbook = openpyxl.Workbook()
@@ -56,7 +60,7 @@ class ExelWriter:
         # Set headline style
         bold16font = Font(size=16, bold=True)
 
-        sheet['A1'] = 'User'
+        sheet['A1'] = 'Sender'
         sheet['A1'].font = bold16font
 
         sheet['B1'] = 'Message'
@@ -67,6 +71,9 @@ class ExelWriter:
 
         sheet['D1'] = 'Service'
         sheet['D1'].font = bold16font
+
+        sheet['E1'] = 'Destination Caller ID'
+        sheet['E1'].font = bold16font
 
         # Write users to 1st column
         users_row = 2
@@ -91,6 +98,12 @@ class ExelWriter:
         for service in services:
             sheet.cell(row=service_row, column=4).value = service
             service_row += 1
+
+        # Write accounts to 5th column
+        account_row = 2
+        for account in accounts:
+            sheet.cell(row=account_row, column=5).value = account
+            account_row += 1
 
         # Save the workbook (excel file)
         try:

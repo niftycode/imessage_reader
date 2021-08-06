@@ -7,9 +7,8 @@ Python 3.8+
 Author: niftycode
 Modified by: thecircleisround
 Date created: October 8th, 2020
-Date modified: July 29, 2021
+Date modified: August 6th, 2021
 """
-
 
 import sys
 from dataclasses import dataclass
@@ -21,8 +20,8 @@ from imessage_reader import common, create_sqlite, write_excel
 @dataclass
 class MessageData:
     """
-    This dataclass is the store for the data
-    (user id, message, imessage or sms service).
+    This dataclass is the store for the data:
+    user id (sender), text, date, service and account (destination caller id).
     """
     user_id: str
     text: str
@@ -34,11 +33,11 @@ class MessageData:
         """
         :return: String representation of this object
         """
-        return f"user id: {self.user_id}:\n" \
+        return f"sender (user id): {self.user_id}:\n" \
                f"message: {self.text}\n" \
                f"date: {self.date}\n" \
-               f"service: {self.service}\n"\
-               f"account: {self.account}\n"
+               f"service: {self.service}\n" \
+               f"destination caller id: {self.account}\n"
 
 
 # noinspection PyMethodMayBeStatic
@@ -56,8 +55,8 @@ class FetchData:
               "datetime((date / 1000000000) + 978307200, 'unixepoch', 'localtime')," \
               "handle.id, " \
               "handle.service, " \
-              "message.destination_caller_id "\
-              "FROM message "\
+              "message.destination_caller_id " \
+              "FROM message " \
               "JOIN handle on message.handle_id=handle.ROWID"
 
     def __init__(self, system=None):
@@ -79,6 +78,7 @@ class FetchData:
         data = []
         for row in rval:
             data.append(MessageData(row[2], row[0], row[1], row[3], row[4]))
+
         return data
 
     def show_user_txt(self, export: str):
@@ -109,7 +109,7 @@ class FetchData:
     def _export_excel(self, data: list):
         """
         Export data (write Excel file)
-        :param data: imessage objects containing user id, message and service
+        :param data: imessage objects containing user id, message, date, service, account
         """
         file_path = expanduser("~") + '/Desktop/'
         ew = write_excel.ExelWriter(data, file_path)
@@ -118,7 +118,7 @@ class FetchData:
     def _export_sqlite(self, data: list):
         """
         Export data (create SQLite3 database)
-        :param data: imessage objects containig user id, message, service, account
+        :param data: imessage objects containig user id, message, date, service, account
         """
         file_path = expanduser("~") + '/Desktop/'
         cd = create_sqlite.CreateDatabase(data, file_path)
@@ -127,7 +127,7 @@ class FetchData:
     def get_messages(self) -> list:
         """
         Create a list with tuples (user id, message, date, service, account)
-        This method is for CLI usage.
+        This method is for module usage.
         :return: List with tuples (user id, message, date, service, account)
         """
         fetched_data = self._read_database()
@@ -143,7 +143,7 @@ class FetchData:
             messages.append(data.text)
             dates.append(data.date)
             service.append(data.service)
-            account.append(data.last_addressed_handle)
+            account.append(data.account)
 
         data = list(zip(users, messages, dates, service, account))
 

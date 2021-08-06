@@ -4,9 +4,8 @@
 """
 Create a SQLite3 database containing iMessage data (user id, text, date, service)
 Python 3.8+
-Author: niftycode
 Date created: April 30th, 2021
-Date modified: -
+Date modified: August 6th, 2021
 """
 
 import sqlite3
@@ -14,11 +13,12 @@ import sqlite3
 
 class CreateDatabase:
     """This class manages the export to SQLite"""
+
     def __init__(self, imessage_data: list, file_path: str):
         """
         init function of this class
         :param imessage_data: List with MessageData objects
-                containing user id, text, date and service
+                containing user id, text, date, service and account
         :param file_path: The path to the loaction of the Excel file
         """
         self.imessage_data = imessage_data
@@ -27,7 +27,7 @@ class CreateDatabase:
     def create_sqlite_db(self):
         """
         Create a SQLite3 database in the Desktop folder.
-        Add user, text, date and service to the databse.
+        Add user, text, date and service to the database.
         """
         database = self.file_path + 'iMessage-Data.sqlite'
 
@@ -37,11 +37,20 @@ class CreateDatabase:
         cur.execute('DROP TABLE IF EXISTS Messages')
 
         cur.execute('''
-        CREATE TABLE IF NOT EXISTS Messages (user TEXT, text TEXT, date TEXT, service TEXT)''')
+        CREATE TABLE IF NOT EXISTS Messages (sender TEXT,
+        message TEXT,
+        date TEXT,
+        service TEXT,
+        destination_caller_id TEXT)''')
 
         for data in self.imessage_data:
-            cur.execute('''INSERT INTO Messages (user, text, date, service)
-                VALUES(?, ?, ?, ?)''', (data.user_id, data.text, data.date, data.service))
+            cur.execute('''INSERT INTO Messages (sender, message, date, service, destination_caller_id)
+                VALUES(?, ?, ?, ?, ?)''', (data.user_id, data.text, data.date, data.service, data.account))
 
         conn.commit()
         cur.close()
+
+        print()
+        print(">>> SQLite database successfully created! <<<")
+        print("You find the Database in your Desktop folder.")
+        print()

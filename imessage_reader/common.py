@@ -4,15 +4,13 @@
 """
 common.py
 Python 3.8+
-Author: niftycode
 Date created: June 14th, 2020
 Date modified: October 27th, 2020
 """
 
-
+import platform
 import sqlite3
 import sys
-import platform
 from enum import Enum
 
 

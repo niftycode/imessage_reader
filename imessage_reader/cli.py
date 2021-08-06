@@ -5,14 +5,14 @@
 cli.py
 Entrypoint to the command line interface.
 Python 3.8+
-Author: niftycode
 Date created: October 15th, 2020
 Date modified: April 30th, 2021
 """
 
 import argparse
-from imessage_reader import info
+
 from imessage_reader import fetch_data
+from imessage_reader import info
 
 
 def get_parser():
