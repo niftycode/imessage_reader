@@ -4,6 +4,14 @@
 
 This is a forensic tool written in Python 3. Use this tool to fetch the content (phone numbers, email addresses, messages and the account) from the *chat.db* database file on **macOS** (version 10.14 or above).
 
+The following information is currently being read from the database:
+
+* user id (sender's phone number or email address)
+* message
+* date and time
+* service (iMessage or SMS)
+* account (recipient account)
+
 ## Background
 
 Received messages (iMessage or SMS) and attachments will be saved in "~/Library/Messages". This directory contains a "chat.db" file (SQLite3) with two tables of interest: *handle* and *message*. The *handle* table contains the recipients (email address or phone number). The received messages are in the *message* table.
@@ -16,6 +24,10 @@ Since the iMessage database is only available under macOS, it makes no sense to 
 
 * **Python 3.8+**
 * openpyxl
+
+To run tests install **pytest**:
+
+    pip3 install pytest
 
 ## Install
 
