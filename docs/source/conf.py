@@ -14,8 +14,6 @@
 import os
 import sys
 
-import sphinx_rtd_theme
-
 sys.path.insert(0, os.path.abspath('../..'))
 sys.setrecursionlimit(1500)
 
@@ -26,8 +24,7 @@ copyright = "2020, Bodo Schönfeld"
 author = "Bodo Schönfeld"
 
 # The full version, including alpha/beta/rc tags
-release = "0.2.0"
-
+release = "0.2.1"
 
 # -- General configuration ---------------------------------------------------
 
@@ -51,7 +48,6 @@ extensions = [
 ]
 
 html_theme = "sphinx_rtd_theme"
-
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ["_templates"]

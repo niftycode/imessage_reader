@@ -6,7 +6,7 @@
 Write Excel file containing iMessage data (user id, text, date, service, account)
 Python 3.8+
 Date created: October 1st, 2020
-Date modified: August 6th, 2021
+Date modified: August 7th, 2021
 """
 
 from datetime import datetime
@@ -60,7 +60,7 @@ class ExelWriter:
         # Set headline style
         bold16font = Font(size=16, bold=True)
 
-        sheet['A1'] = 'Sender'
+        sheet['A1'] = 'User ID'
         sheet['A1'].font = bold16font
 
         sheet['B1'] = 'Message'

@@ -1,2 +1,2 @@
 # Requirements without Version Specifiers
-openpyxl~=3.0.5
+openpyxl
