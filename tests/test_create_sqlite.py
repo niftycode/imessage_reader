@@ -18,7 +18,8 @@ def message_data_one_row():
                                      text='Hello Max!',
                                      date='2021-04-11 17:02:34',
                                      service='iMessage',
-                                     account='+01 555 17172')]
+                                     account='+01 555 17172',
+                                     is_from_me = 1)]
     return message_data_list
 
 

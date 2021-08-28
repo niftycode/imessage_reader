@@ -19,7 +19,8 @@ def message_data_one_row():
                                      text='Hello!',
                                      date='2020-10-27 17:19:20',
                                      service='SMS',
-                                     account='+01 555 17172')]
+                                     account='+01 555 17172',
+                                     is_from_me=1)]
     return message_data_list
 
 
