@@ -6,10 +6,10 @@
 App info, license, version
 Python 3.8+
 Date created: June 14th, 2020
-Date modified: August 7th, 2021
+Date modified: September 17th, 2021
 """
 
-VERSION = '0.2.1'
+VERSION = '0.3.0'
 
 
 def app_info():

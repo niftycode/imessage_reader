@@ -7,7 +7,7 @@ Python 3.8+
 Author: niftycode
 Modified by: thecircleisround
 Date created: October 8th, 2020
-Date modified: August 28th, 2021
+Date modified: September 17th, 2021
 """
 
 import sys
@@ -28,7 +28,7 @@ class MessageData:
     date: str
     service: str
     account: str
-    is_from_me: str
+    is_from_me: int
 
     def __str__(self):
         """
