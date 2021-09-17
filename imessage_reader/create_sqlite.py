@@ -5,7 +5,7 @@
 Create a SQLite3 database containing iMessage data (user id, text, date, service)
 Python 3.8+
 Date created: April 30th, 2021
-Date modified: August 7th, 2021
+Date modified: August 28th, 2021
 """
 
 import sqlite3
@@ -41,11 +41,12 @@ class CreateDatabase:
         message TEXT,
         date TEXT,
         service TEXT,
-        destination_caller_id TEXT)''')
+        destination_caller_id TEXT, 
+        is_from_me TEXT)''')
 
         for data in self.imessage_data:
-            cur.execute('''INSERT INTO Messages (user_id, message, date, service, destination_caller_id)
-                VALUES(?, ?, ?, ?, ?)''', (data.user_id, data.text, data.date, data.service, data.account))
+            cur.execute('''INSERT INTO Messages (user_id, message, date, service, destination_caller_id, is_from_me)
+                VALUES(?, ?, ?, ?, ?, ?)''', (data.user_id, data.text, data.date, data.service, data.account, data.is_from_me))
 
         conn.commit()
         cur.close()

@@ -6,7 +6,7 @@
 Write Excel file containing iMessage data (user id, text, date, service, account)
 Python 3.8+
 Date created: October 1st, 2020
-Date modified: August 7th, 2021
+Date modified: August 28th, 2021
 """
 
 from datetime import datetime
@@ -40,6 +40,7 @@ class ExelWriter:
         dates = []
         services = []
         accounts = []
+        is_from_me = []
 
         for data in self.imessage_data:
             users.append(data.user_id)
@@ -47,6 +48,7 @@ class ExelWriter:
             dates.append(data.date)
             services.append(data.service)
             accounts.append(data.account)
+            is_from_me.append(data.is_from_me)
 
         # Call openpyxl.Workbook() to create a new blank Excel workbook
         workbook = openpyxl.Workbook()
@@ -74,6 +76,9 @@ class ExelWriter:
 
         sheet['E1'] = 'Destination Caller ID'
         sheet['E1'].font = bold16font
+
+        sheet['F1'] = 'Is From Me'
+        sheet['F1'].font = bold16font
 
         # Write users to 1st column
         users_row = 2
@@ -104,6 +109,12 @@ class ExelWriter:
         for account in accounts:
             sheet.cell(row=account_row, column=5).value = account
             account_row += 1
+
+        # Write is_from_me to 6th column
+        is_from_me_row = 2
+        for from_me in is_from_me:
+            sheet.cell(row=is_from_me_row, column=6).value = from_me
+            is_from_me_row += 1
 
         # Save the workbook (excel file)
         try:

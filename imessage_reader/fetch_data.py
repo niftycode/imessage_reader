@@ -7,7 +7,7 @@ Python 3.8+
 Author: niftycode
 Modified by: thecircleisround
 Date created: October 8th, 2020
-Date modified: August 6th, 2021
+Date modified: August 28th, 2021
 """
 
 import sys
@@ -28,6 +28,7 @@ class MessageData:
     date: str
     service: str
     account: str
+    is_from_me: str
 
     def __str__(self):
         """
@@ -37,7 +38,8 @@ class MessageData:
                f"message: {self.text}\n" \
                f"date: {self.date}\n" \
                f"service: {self.service}\n" \
-               f"destination caller id: {self.account}\n"
+               f"destination caller id: {self.account}\n "\
+               f"is_from_me: {self.is_from_me}\n"
 
 
 # noinspection PyMethodMayBeStatic
@@ -55,7 +57,8 @@ class FetchData:
               "datetime((date / 1000000000) + 978307200, 'unixepoch', 'localtime')," \
               "handle.id, " \
               "handle.service, " \
-              "message.destination_caller_id " \
+              "message.destination_caller_id, " \
+              "message.is_from_me "\
               "FROM message " \
               "JOIN handle on message.handle_id=handle.ROWID"
 
@@ -77,7 +80,7 @@ class FetchData:
 
         data = []
         for row in rval:
-            data.append(MessageData(row[2], row[0], row[1], row[3], row[4]))
+            data.append(MessageData(row[2], row[0], row[1], row[3], row[4], row[5]))
 
         return data
 
@@ -137,6 +140,8 @@ class FetchData:
         dates = []
         service = []
         account = []
+        is_from_me = []
+
 
         for data in fetched_data:
             users.append(data.user_id)
@@ -144,7 +149,8 @@ class FetchData:
             dates.append(data.date)
             service.append(data.service)
             account.append(data.account)
+            is_from_me.append(data.is_from_me)
 
-        data = list(zip(users, messages, dates, service, account))
+        data = list(zip(users, messages, dates, service, account, is_from_me))
 
         return data
