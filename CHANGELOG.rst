@@ -40,3 +40,8 @@ Updated
 -------------------
 
 - New feature added by thecircleisround: Fetch account info
+
+[0.3.0]-2021-09-17
+-------------------
+
+- New feature added by thecircleisround: Check to see if a message has been sent or received.

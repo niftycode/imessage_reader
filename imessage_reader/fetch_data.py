@@ -21,7 +21,7 @@ from imessage_reader import common, create_sqlite, write_excel
 class MessageData:
     """
     This dataclass is the store for the data:
-    user id (sender), text, date, service and account (destination caller id).
+    user id, text, date, service and account (destination caller id).
     """
     user_id: str
     text: str
@@ -86,7 +86,7 @@ class FetchData:
 
     def show_user_txt(self, export: str):
         """
-        Call fetch_message_data() method, print fetched data and export data.
+        Invoke _read_database(), print fetched data and export data.
         This method is for CLI usage.
         :param export: Determine whether to export data
         """
@@ -112,7 +112,7 @@ class FetchData:
     def _export_excel(self, data: list):
         """
         Export data (write Excel file)
-        :param data: imessage objects containing user id, message, date, service, account
+        :param data: message objects containing user id, message, date, service, account
         """
         file_path = expanduser("~") + '/Desktop/'
         ew = write_excel.ExelWriter(data, file_path)
@@ -121,7 +121,7 @@ class FetchData:
     def _export_sqlite(self, data: list):
         """
         Export data (create SQLite3 database)
-        :param data: imessage objects containig user id, message, date, service, account
+        :param data: message objects containig user id, message, date, service, account
         """
         file_path = expanduser("~") + '/Desktop/'
         cd = create_sqlite.CreateDatabase(data, file_path)
@@ -142,7 +142,6 @@ class FetchData:
         account = []
         is_from_me = []
 
-
         for data in fetched_data:
             users.append(data.user_id)
             messages.append(data.text)
@@ -154,3 +153,20 @@ class FetchData:
         data = list(zip(users, messages, dates, service, account, is_from_me))
 
         return data
+
+    def get_recipients(self) -> list:
+        """
+        Create a list containing all recipients
+        This method is for module usage.
+        :return: List with recipients
+        """
+        fetched_data = self._read_database()
+
+        recipients = []
+
+        for data in fetched_data:
+            # Check if a message is from me
+            if data.is_from_me == 0:
+                recipients.append(data.user_id)
+
+        return recipients

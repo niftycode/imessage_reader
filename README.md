@@ -12,6 +12,7 @@ The following information is currently being read from the database:
 * date and time
 * service (iMessage or SMS)
 * account (destination caller id)
+* is the message from me
 
 ## Background
 
