@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 with io.open('README.md', 'rt', encoding='utf8') as f:
     LONG_DESC = f.read()
 
-VERSION = '0.2.1'
+VERSION = '0.3.0'
 
 setup(
     name='imessage_reader',
