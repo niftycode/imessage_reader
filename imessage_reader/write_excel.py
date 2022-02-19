@@ -22,7 +22,7 @@ class ExelWriter:
 
     def __init__(self, imessage_data: list, file_path: str):
         """
-        init function of this class
+        The init function of this class
         :param imessage_data: List with MessageData objects
                 containing user id, text, date, service and account
         :param file_path: The path to the loaction of the Excel file

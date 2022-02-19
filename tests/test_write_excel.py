@@ -5,7 +5,7 @@ import pytest
 from datetime import datetime
 from os import scandir
 from imessage_reader.write_excel import ExelWriter
-from imessage_reader.fetch_data import MessageData
+from imessage_reader.data_container import MessageData
 
 
 @pytest.fixture()

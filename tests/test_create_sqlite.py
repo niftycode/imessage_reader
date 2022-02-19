@@ -4,7 +4,7 @@
 import pytest
 from os import scandir
 from imessage_reader.create_sqlite import CreateDatabase
-from imessage_reader.fetch_data import MessageData
+from imessage_reader.data_container import MessageData
 
 
 @pytest.fixture()

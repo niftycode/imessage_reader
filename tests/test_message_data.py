@@ -5,7 +5,7 @@ import pytest
 import os
 import sqlite3
 from imessage_reader import common
-from imessage_reader.fetch_data import MessageData
+from imessage_reader.data_container import MessageData
 
 
 @pytest.fixture()

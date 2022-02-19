@@ -9,7 +9,7 @@ Date created: June 14th, 2020
 Date modified: September 17th, 2021
 """
 
-VERSION = '0.3.0'
+VERSION = '0.3.1'
 
 
 def app_info():

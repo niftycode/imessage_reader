@@ -7,45 +7,20 @@ Python 3.8+
 Author: niftycode
 Modified by: thecircleisround
 Date created: October 8th, 2020
-Date modified: September 17th, 2021
+Date modified: February 19th, 2022
 """
 
 import sys
-from dataclasses import dataclass
+
 from os.path import expanduser
 
-from imessage_reader import common, create_sqlite, write_excel
-
-
-@dataclass
-class MessageData:
-    """
-    This dataclass is the store for the data:
-    user id, text, date, service and account (destination caller id).
-    """
-    user_id: str
-    text: str
-    date: str
-    service: str
-    account: str
-    is_from_me: int
-
-    def __str__(self):
-        """
-        :return: String representation of this object
-        """
-        return f"sender (user id): {self.user_id}:\n" \
-               f"message: {self.text}\n" \
-               f"date: {self.date}\n" \
-               f"service: {self.service}\n" \
-               f"destination caller id: {self.account}\n "\
-               f"is_from_me: {self.is_from_me}\n"
+from imessage_reader import common, create_sqlite, write_excel, data_container
 
 
 # noinspection PyMethodMayBeStatic
 class FetchData:
     """
-    This class contains the methods for fetch, print and export the messages.
+    This class contains the methods to fetch, print and export the messages.
     """
 
     # The path to the iMessage database
@@ -80,7 +55,7 @@ class FetchData:
 
         data = []
         for row in rval:
-            data.append(MessageData(row[2], row[0], row[1], row[3], row[4], row[5]))
+            data.append(data_container.MessageData(row[2], row[0], row[1], row[3], row[4], row[5]))
 
         return data
 
