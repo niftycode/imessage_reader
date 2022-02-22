@@ -57,28 +57,28 @@ class ExelWriter:
         sheet = workbook.active
 
         # Set a title
-        sheet.title = 'iMessages'
+        sheet.title = "iMessages"
 
         # Set headline style
         bold16font = Font(size=16, bold=True)
 
-        sheet['A1'] = 'User ID'
-        sheet['A1'].font = bold16font
+        sheet["A1"] = "User ID"
+        sheet["A1"].font = bold16font
 
-        sheet['B1'] = 'Message'
-        sheet['B1'].font = bold16font
+        sheet["B1"] = "Message"
+        sheet["B1"].font = bold16font
 
-        sheet['C1'] = 'Date'
-        sheet['C1'].font = bold16font
+        sheet["C1"] = "Date"
+        sheet["C1"].font = bold16font
 
-        sheet['D1'] = 'Service'
-        sheet['D1'].font = bold16font
+        sheet["D1"] = "Service"
+        sheet["D1"].font = bold16font
 
-        sheet['E1'] = 'Destination Caller ID'
-        sheet['E1'].font = bold16font
+        sheet["E1"] = "Destination Caller ID"
+        sheet["E1"].font = bold16font
 
-        sheet['F1'] = 'Is From Me'
-        sheet['F1'].font = bold16font
+        sheet["F1"] = "Is From Me"
+        sheet["F1"].font = bold16font
 
         # Write users to 1st column
         users_row = 2
@@ -118,7 +118,10 @@ class ExelWriter:
 
         # Save the workbook (excel file)
         try:
-            workbook.save(self.file_path + f'iMessage-Data_{datetime.now().strftime("%Y-%m-%d")}.xlsx')
+            workbook.save(
+                self.file_path
+                + f'iMessage-Data_{datetime.now().strftime("%Y-%m-%d")}.xlsx'
+            )
             print()
             print(">>> Excel file successfully created! <<<")
             print("You find the Excel file in your Desktop folder.")

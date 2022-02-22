@@ -16,20 +16,24 @@ from imessage_reader import info
 
 
 def get_parser():
-    parser = argparse.ArgumentParser(description="A tool to fetch imessages "
-                                                 "from the chat.db (macOS).")
+    parser = argparse.ArgumentParser(
+        description="A tool to fetch imessages " "from the chat.db (macOS)."
+    )
 
-    parser.add_argument('-e', '--excel',
-                        help='Create Excel file containing user id and messages.',
-                        action='store_true')
+    parser.add_argument(
+        "-e",
+        "--excel",
+        help="Create Excel file containing user id and messages.",
+        action="store_true",
+    )
 
-    parser.add_argument('-s', '--sqlite',
-                        help='Create a SQLite3 database',
-                        action='store_true')
+    parser.add_argument(
+        "-s", "--sqlite", help="Create a SQLite3 database", action="store_true"
+    )
 
-    parser.add_argument('-v', '--version',
-                        help='Show the current version.',
-                        action='store_true')
+    parser.add_argument(
+        "-v", "--version", help="Show the current version.", action="store_true"
+    )
 
     return parser
 
@@ -43,11 +47,11 @@ def evaluate(args):
     if args.version:
         info.app_info()
     elif args.excel:
-        data.show_user_txt('excel')
+        data.show_user_txt("excel")
     elif args.sqlite:
-        data.show_user_txt('sqlite')
+        data.show_user_txt("sqlite")
     else:
-        data.show_user_txt('nothing')
+        data.show_user_txt("nothing")
 
 
 def main():
@@ -60,5 +64,5 @@ def main():
     evaluate(args)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

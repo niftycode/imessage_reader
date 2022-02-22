@@ -24,25 +24,27 @@ class FetchData:
     """
 
     # The path to the iMessage database
-    DB_PATH = expanduser("~") + '/Library/Messages/chat.db'
+    DB_PATH = expanduser("~") + "/Library/Messages/chat.db"
 
     # The SQL command
-    SQL_CMD = "SELECT " \
-              "text, " \
-              "datetime((date / 1000000000) + 978307200, 'unixepoch', 'localtime')," \
-              "handle.id, " \
-              "handle.service, " \
-              "message.destination_caller_id, " \
-              "message.is_from_me "\
-              "FROM message " \
-              "JOIN handle on message.handle_id=handle.ROWID"
+    SQL_CMD = (
+        "SELECT "
+        "text, "
+        "datetime((date / 1000000000) + 978307200, 'unixepoch', 'localtime'),"
+        "handle.id, "
+        "handle.service, "
+        "message.destination_caller_id, "
+        "message.is_from_me "
+        "FROM message "
+        "JOIN handle on message.handle_id=handle.ROWID"
+    )
 
     def __init__(self, system=None):
         if system is None:
             self.operating_system = common.get_platform()
 
     def _check_system(self):
-        if self.operating_system != 'MAC':
+        if self.operating_system != "MAC":
             sys.exit("Your operating system is not supported yet!")
 
     def _read_database(self) -> list:
@@ -55,7 +57,11 @@ class FetchData:
 
         data = []
         for row in rval:
-            data.append(data_container.MessageData(row[2], row[0], row[1], row[3], row[4], row[5]))
+            data.append(
+                data_container.MessageData(
+                    row[2], row[0], row[1], row[3], row[4], row[5]
+                )
+            )
 
         return data
 
@@ -77,11 +83,11 @@ class FetchData:
             print(data)
 
         # Excel export
-        if export == 'excel':
+        if export == "excel":
             self._export_excel(fetched_data)
 
         # SQLite3 export
-        if export == 'sqlite':
+        if export == "sqlite":
             self._export_sqlite(fetched_data)
 
     def _export_excel(self, data: list):
@@ -89,7 +95,7 @@ class FetchData:
         Export data (write Excel file)
         :param data: message objects containing user id, message, date, service, account
         """
-        file_path = expanduser("~") + '/Desktop/'
+        file_path = expanduser("~") + "/Desktop/"
         ew = write_excel.ExelWriter(data, file_path)
         ew.write_data()
 
@@ -98,7 +104,7 @@ class FetchData:
         Export data (create SQLite3 database)
         :param data: message objects containig user id, message, date, service, account
         """
-        file_path = expanduser("~") + '/Desktop/'
+        file_path = expanduser("~") + "/Desktop/"
         cd = create_sqlite.CreateDatabase(data, file_path)
         cd.create_sqlite_db()
 

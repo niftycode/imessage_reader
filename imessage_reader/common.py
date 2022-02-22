@@ -18,6 +18,7 @@ class Platform(Enum):
     """
     An enum used to indicate the system's operating system
     """
+
     OTHER = 0
     LINUX = 1
     MAC = 2
@@ -30,11 +31,11 @@ def get_platform() -> str:
     :return: The operating system this program is running on
     """
     system = platform.system()
-    if system == 'Linux':
+    if system == "Linux":
         return str(Platform.LINUX.name)
-    if system == 'Darwin':
+    if system == "Darwin":
         return str(Platform.MAC.name)
-    if system == 'Windows':
+    if system == "Windows":
         return str(Platform.WINDOWS.name)
     raise NotImplementedError(f"Platform {system} is not supported yet!")
 
