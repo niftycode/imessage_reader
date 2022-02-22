@@ -77,7 +77,6 @@ def main():
     """
     Entrypoint to the command-line interface (CLI).
     """
-
     parser = get_parser()
     args = parser.parse_args()
     evaluate(args)

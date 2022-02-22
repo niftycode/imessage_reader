@@ -112,6 +112,24 @@ class FetchData:
         cd = create_sqlite.CreateDatabase(data, file_path)
         cd.create_sqlite_db()
 
+    def _get_recipients(self):
+        """
+        Create a list containing all recipients and
+        show the recipients in the command line.
+        """
+        fetched_data = self._read_database()
+
+        # Create a list with recipients
+        recipients = [i.user_id for i in fetched_data if i.is_from_me == 0]
+
+        print()
+        print("List of Recipients")
+        print("------------------------")
+        print()
+
+        for recipient in recipients:
+            print(recipient)
+
     def get_messages(self) -> list:
         """
         Create a list with tuples (user id, message, date, service, account, is_from_me)
@@ -138,21 +156,3 @@ class FetchData:
         data = list(zip(users, messages, dates, service, account, is_from_me))
 
         return data
-
-    def _get_recipients(self):
-        """
-        Create a list containing all recipients and
-        show the recipients in the command line.
-        """
-        fetched_data = self._read_database()
-
-        # Create a list with recipients
-        recipients = [i.user_id for i in fetched_data if i.is_from_me == 0]
-
-        print()
-        print("List of Recipients")
-        print("------------------------")
-        print()
-
-        for recipient in recipients:
-            print(recipient)
