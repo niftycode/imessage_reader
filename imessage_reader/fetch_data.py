@@ -79,8 +79,9 @@ class FetchData:
         fetched_data = self._read_database()
 
         # CLI output
-        for data in fetched_data:
-            print(data)
+        if export == "nothing":
+            for data in fetched_data:
+                print(data)
 
         # Excel export
         if export == "excel":
@@ -89,6 +90,9 @@ class FetchData:
         # SQLite3 export
         if export == "sqlite":
             self._export_sqlite(fetched_data)
+
+        if export == "recipients":
+            self._get_recipients()
 
     def _export_excel(self, data: list):
         """
@@ -110,9 +114,9 @@ class FetchData:
 
     def get_messages(self) -> list:
         """
-        Create a list with tuples (user id, message, date, service, account)
+        Create a list with tuples (user id, message, date, service, account, is_from_me)
         This method is for module usage.
-        :return: List with tuples (user id, message, date, service, account)
+        :return: List with tuples (user id, message, date, service, account, is_from_me)
         """
         fetched_data = self._read_database()
 
@@ -135,19 +139,20 @@ class FetchData:
 
         return data
 
-    def get_recipients(self) -> list:
+    def _get_recipients(self):
         """
-        Create a list containing all recipients
-        This method is for module usage.
-        :return: List with recipients
+        Create a list containing all recipients and
+        show the recipients in the command line.
         """
         fetched_data = self._read_database()
 
-        recipients = []
+        # Create a list with recipients
+        recipients = [i.user_id for i in fetched_data if i.is_from_me == 0]
 
-        for data in fetched_data:
-            # Check if a message is from me
-            if data.is_from_me == 0:
-                recipients.append(data.user_id)
+        print()
+        print("List of Recipients")
+        print("------------------------")
+        print()
 
-        return recipients
+        for recipient in recipients:
+            print(recipient)

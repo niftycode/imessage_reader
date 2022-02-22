@@ -32,11 +32,24 @@ def get_parser() -> argparse.ArgumentParser:
     )
 
     parser.add_argument(
-        "-s", "--sqlite", help="Create a SQLite3 database", action="store_true"
+        "-s",
+        "--sqlite",
+        help="Create a SQLite3 database",
+        action="store_true"
     )
 
     parser.add_argument(
-        "-v", "--version", help="Show the current version.", action="store_true"
+        "-r",
+        "--recipients",
+        help="Show the recipients",
+        action="store_true"
+    )
+
+    parser.add_argument(
+        "-v",
+        "--version",
+        help="Show the current version.",
+        action="store_true"
     )
 
     return parser
@@ -54,6 +67,8 @@ def evaluate(args):
         data.show_user_txt("excel")
     elif args.sqlite:
         data.show_user_txt("sqlite")
+    elif args.recipients:
+        data.show_user_txt("recipients")
     else:
         data.show_user_txt("nothing")
 
