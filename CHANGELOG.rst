@@ -45,3 +45,9 @@ Updated
 -------------------
 
 - New feature added by thecircleisround: Check to see if a message has been sent or received.
+
+[0.3.1]-2022-02-22
+-------------------
+
+- Fix bugs
+- Improved output view
