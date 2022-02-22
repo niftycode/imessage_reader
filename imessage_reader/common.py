@@ -13,6 +13,8 @@ import sqlite3
 import sys
 from enum import Enum
 
+VERSION = "0.3.2"
+
 
 class Platform(Enum):
     """

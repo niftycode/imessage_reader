@@ -6,10 +6,13 @@
 App info, license, version
 Python 3.8+
 Date created: June 14th, 2020
-Date modified: September 17th, 2021
+Date modified: February 22nd, 2022
 """
 
-VERSION = "0.3.2"
+
+from imessage_reader import common
+
+VERSION = common.VERSION
 
 
 def app_info():

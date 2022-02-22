@@ -2,14 +2,15 @@ import io
 
 from setuptools import setup, find_packages
 
+from imessage_reader import common
+
 with io.open('README.md', 'rt', encoding='utf8') as f:
     LONG_DESC = f.read()
 
-VERSION = '0.3.2'
 
 setup(
     name='imessage_reader',
-    version=VERSION,
+    version=common.VERSION,
     license='MIT',
     description='Fetch recipients and chat messages from the chat.db database.',
     long_description=LONG_DESC,
