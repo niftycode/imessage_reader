@@ -13,4 +13,4 @@ def app_version():
 
 
 def test_app_info(app_version):
-    assert (info.VERSION == app_version)
+    assert info.VERSION == app_version
