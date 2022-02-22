@@ -17,7 +17,7 @@ from dataclasses import dataclass
 class MessageData:
     """
     This dataclass is the store for the data:
-    user id, text, date, service and account (destination caller id).
+    user id, text, date, service and account (caller id).
     """
 
     user_id: str

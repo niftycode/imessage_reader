@@ -15,7 +15,11 @@ from imessage_reader import fetch_data
 from imessage_reader import info
 
 
-def get_parser():
+def get_parser() -> argparse.ArgumentParser:
+    """
+    Create a command line parser.
+    :return:
+    """
     parser = argparse.ArgumentParser(
         description="A tool to fetch imessages " "from the chat.db (macOS)."
     )
