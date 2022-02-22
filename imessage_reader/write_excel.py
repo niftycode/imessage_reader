@@ -32,7 +32,7 @@ class ExelWriter:
 
     def write_data(self):
         """
-        Write data (user id, text, date, service, account) to Excel
+        Write data (user id, text, date, service, account, is_from_me) to Excel
         """
 
         users = []
