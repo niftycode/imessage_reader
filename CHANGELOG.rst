@@ -51,3 +51,8 @@ Updated
 
 - Fix bugs
 - Improved output view
+
+[0.4.0]-2022-02-26
+-------------------
+
+- New feature added: Show list of recipients
