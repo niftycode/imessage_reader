@@ -59,6 +59,12 @@ Use
 to create a SQLite3 database containing users, messages, date and service (SMS or iMessage). The file will be stored in
 the Desktop folder.
 
+Use
+
+    imessage_reader -r
+
+to show a list of recipients.
+
 **Note**: You need access to the *Library* folder in order to read the iMessage database file ("chat.db"). You can add
 access (for *Terminal* or *iTerm*) in
 

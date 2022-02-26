@@ -5,7 +5,7 @@
 common.py
 Python 3.8+
 Date created: June 14th, 2020
-Date modified: October 27th, 2020
+Date modified: February 26th, 2022
 """
 
 import platform
