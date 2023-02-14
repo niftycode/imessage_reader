@@ -29,14 +29,17 @@ class FetchData:
     # The SQL command
     SQL_CMD = (
         "SELECT "
-        "text, "
-        "datetime((date / 1000000000) + 978307200, 'unixepoch', 'localtime'),"
-        "handle.id, "
-        "handle.service, "
-        "message.destination_caller_id, "
-        "message.is_from_me "
-        "FROM message "
-        "JOIN handle on message.handle_id=handle.ROWID"
+            "text, "
+            "datetime((date / 1000000000) + 978307200, 'unixepoch', 'localtime'),"
+            "handle.id, "
+            "handle.service, "
+            "message.destination_caller_id, "
+            "message.is_from_me, "
+            "message.attributedBody "
+        "FROM "
+            "message "
+        "JOIN "
+            "handle on message.handle_id=handle.ROWID"
     )
 
     def __init__(self, system=None):
@@ -57,9 +60,27 @@ class FetchData:
 
         data = []
         for row in rval:
+            text = row[0]
+            # the chatdb has some weird behavior where sometimes the text value is None
+            # and the text string is buried in an binary blob under the attributedBody field.
+            if text is None and row[6] is not None:
+                try:
+                    text = row[6].split(b'NSString')[1]
+                    text = text[5:] # stripping some preamble which generally looks like this: b'\x01\x94\x84\x01+'
+                    
+                    if text[0] == 129: # this 129 is b'\x81, python indexes byte strings as ints, this is equivalent to text[0:1] == b'\x81'
+                        length = int.from_bytes(text[1:3], 'little') 
+                        text = text[3:length  + 3]
+                    else:
+                        length = text[0]
+                        text = text[1:length + 1]
+                    text = text.decode()
+                except Exception as e:
+                    pass
+
             data.append(
                 data_container.MessageData(
-                    row[2], row[0], row[1], row[3], row[4], row[5]
+                    row[2], text, row[1], row[3], row[4], row[5]
                 )
             )
 
