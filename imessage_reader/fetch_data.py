@@ -7,14 +7,19 @@ Python 3.8+
 Author: niftycode
 Modified by: thecircleisround
 Date created: October 8th, 2020
-Date modified: February 19th, 2022
+Date modified: March 7th, 2023
 """
 
 import sys
+import logging
 
 from os.path import expanduser
 
 from imessage_reader import common, create_sqlite, write_excel, data_container
+
+
+# logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.INFO)
 
 
 # noinspection PyMethodMayBeStatic
@@ -76,9 +81,12 @@ class FetchData:
                         length = text[0]
                         text = text[1:length + 1]
                     text = text.decode()
+
+                    logging.debug(text)
+
                 except Exception as e:
-                    print("ERROR: Can't read a message.")
                     print(e)
+                    sys.exit("ERROR: Can't read a message.")
 
             data.append(
                 data_container.MessageData(
