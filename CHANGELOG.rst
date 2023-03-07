@@ -56,3 +56,10 @@ Updated
 -------------------
 
 - New feature added: Show list of recipients
+
+[0.5.0]-2023-03-07
+-------------------
+
+- New feature added by SilasStokes: Parse the attributedBody field
+- Added a note about an available attachment
+- Format output

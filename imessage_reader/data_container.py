@@ -33,12 +33,15 @@ class MessageData:
         :return: String representation of this object
         """
         return (
-            f"user id:\t\t\t{self.user_id}\n"
+            f"user id:\t\t{self.user_id}\n"
             f"date and time:\t\t{self.date}\n"
             f"service:\t\t{self.service}\n"
             f"caller id:\t\t{self.account}\n"
             f"is_from_me:\t\t{self.is_from_me}\n"
-            f"----------------------------------------------------\n"
-            f"message:\n"
+            f"\n"
+            f"text:\n"
+            f"========\n"
             f"{self.text}\n"
+            f"\n"
+            f"----------------------------------------------------------------\n"
         )
