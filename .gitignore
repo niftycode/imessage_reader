@@ -3,6 +3,7 @@
 /imessage_reader/__pycache__
 imessage_reader.egg-info/
 /.idea
+identifier.sqlite
 dist/
 build/
 .venv/
