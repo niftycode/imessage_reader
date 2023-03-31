@@ -3,15 +3,15 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to imessage_reader's documentation!
-=============================================
+Welcome
+=======
 
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
 
-A python library for fetching data from the chat.db database on macOS.
+imessage_reader is a python library for fetching data from the chat.db database on macOS.
 
 To fetch users and messages use the following code::
 
@@ -25,13 +25,15 @@ You will retrieve a list with tuples containing a user id with the message.
 Use imessage_reader on the command line with following command::
 
    imessage_reader  # show users and messages on the command line
-   imessage_reader -e  # additionally, export data to Excel
+   imessage_reader -e  # export data to Excel
+   imessage_reader -s  # export data to SQLite3
+   imessage_reader -r  # show a list of recipients
    imessage_reader -v  # show version and license
 
 Features
 --------
 
-- Fetching users and imessages
+- Fetching users and messages
 - Can also be used on the command line
 
 
