@@ -59,6 +59,8 @@ def evaluate(args):
     data = fetch_data.FetchData()
     if args.version:
         info.app_info()
+    elif args.file:
+        fetch_data.print_path(args.file)
     elif args.excel:
         data.show_user_txt("excel")
     elif args.sqlite:

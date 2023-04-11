@@ -6,9 +6,10 @@ Python 3.8+
 Author: niftycode
 Modified by: thecircleisround
 Date created: October 8th, 2020
-Date modified: March 7th, 2023
+Date modified: April 9th, 2023
 """
 
+import os
 import sys
 import logging
 
@@ -37,6 +38,16 @@ SQL_CMD = (
     "FROM message "
     "JOIN handle on message.handle_id=handle.ROWID"
 )
+
+
+def print_path(path: str):
+    if os.path.isdir(path):
+        print("Path exist!")
+    else:
+        print("Wrong path!")
+
+    # if os.path.exists(file_path):
+    # file or directory exists
 
 
 # noinspection PyMethodMayBeStatic
