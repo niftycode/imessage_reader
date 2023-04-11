@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 
 """
 Data Container
@@ -40,7 +39,7 @@ class MessageData:
             f"is_from_me:\t\t{self.is_from_me}\n"
             f"\n"
             f"text:\n"
-            f"========\n"
+            f"=====\n"
             f"{self.text}\n"
             f"\n"
             f"----------------------------------------------------------------\n"

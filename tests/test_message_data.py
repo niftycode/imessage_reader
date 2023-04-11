@@ -31,19 +31,28 @@ def initialize_db(tmpdir):
     DROP TABLE IF EXISTS message;
 
     CREATE TABLE message (
-    user_id     TEXT UNIQUE,
-    text        TEXT UNIQUE,
-    date        TEXT UNIQUE,
-    service     TEXT UNIQUE,
-    account     TEXT UNIQUE,
-    is_from_me  INTEGER
+    user_id                 TEXT UNIQUE,
+    text                    TEXT UNIQUE,
+    date                    TEXT UNIQUE,
+    service                 TEXT UNIQUE,
+    account                 TEXT UNIQUE,
+    is_from_me              INTEGER,
+    attributedBody          BLOB,
+    cache_has_attachments   INTEGER
     );
     """
     )
 
     cur.execute(
-        """INSERT OR IGNORE INTO message(user_id, text, date, service, account, is_from_me)
-        VALUES ( ?, ?, ?, ?, ?, ?)""",
+        """INSERT OR IGNORE INTO message(user_id,
+                                        text,
+                                        date,
+                                        service,
+                                        account,
+                                        is_from_me,
+                                        attributedBody,
+                                        cache_has_attachments)
+        VALUES ( ?, ?, ?, ?, ?, ?, ?, ?)""",
         (
             "max@mustermann.de",
             "Hello Kendra!",
@@ -51,6 +60,8 @@ def initialize_db(tmpdir):
             "iMessage",
             "+01 555 17172",
             1,
+            b'100000000',
+            0,
         ),
     )
 
@@ -66,7 +77,7 @@ def test_message_data(message_data_one_row):
 
 def test_db_data(initialize_db):
     sql_command = (
-        "SELECT user_id, text, date, service, account, is_from_me from message"
+        "SELECT user_id, text, date, service, account, is_from_me, attributedBody, cache_has_attachments from message"
     )
     rval = common.fetch_db_data(initialize_db, sql_command)
     assert isinstance(rval, list)
@@ -76,3 +87,5 @@ def test_db_data(initialize_db):
     assert isinstance(rval[0][3], str)
     assert isinstance(rval[0][4], str)
     assert isinstance(rval[0][5], int)
+    assert isinstance(rval[0][6], bytes)
+    assert isinstance(rval[0][7], int)

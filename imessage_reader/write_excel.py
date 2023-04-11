@@ -1,6 +1,4 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-
 
 """
 Write Excel file containing iMessage data (user id, text, date, service, account)
@@ -25,7 +23,7 @@ class ExelWriter:
         The init function of this class
         :param imessage_data: List with MessageData objects
                 containing user id, text, date, service and account
-        :param file_path: The path to the loaction of the Excel file
+        :param file_path: The path to the location of the Excel file
         """
         self.imessage_data = imessage_data
         self.file_path = file_path
@@ -116,11 +114,10 @@ class ExelWriter:
             sheet.cell(row=is_from_me_row, column=6).value = from_me
             is_from_me_row += 1
 
-        # Save the workbook (excel file)
+        # Save the workbook (Excel file)
         try:
             workbook.save(
-                self.file_path
-                + f'iMessage-Data_{datetime.now().strftime("%Y-%m-%d")}.xlsx'
+                self.file_path + f'iMessage-Data_{datetime.now().strftime("%Y-%m-%d")}.xlsx'
             )
             print()
             print(">>> Excel file successfully created! <<<")
