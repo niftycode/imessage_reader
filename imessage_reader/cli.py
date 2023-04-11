@@ -6,7 +6,7 @@ cli.py
 Entrypoint to the command line interface.
 Python 3.8+
 Date created: October 15th, 2020
-Date modified: April 30th, 2021
+Date modified: April 9th, 2023
 """
 
 import argparse
@@ -16,12 +16,17 @@ from imessage_reader import info
 
 
 def get_parser() -> argparse.ArgumentParser:
-    """
-    Create a command line parser.
-    :return:
+    """Create the argument parser
+
+    Returns:
+        argparse.ArgumentParser: parser
     """
     parser = argparse.ArgumentParser(
-        description="A tool to fetch imessages " "from the chat.db (macOS)."
+        description="A tool to fetch imessages from the chat.db (macOS)."
+    )
+
+    parser.add_argument(
+        "-f", "--file", type=str, required=False, help="Path to the chat.db file."
     )
 
     parser.add_argument(
@@ -32,24 +37,15 @@ def get_parser() -> argparse.ArgumentParser:
     )
 
     parser.add_argument(
-        "-s",
-        "--sqlite",
-        help="Create a SQLite3 database",
-        action="store_true"
+        "-s", "--sqlite", help="Create a SQLite3 database", action="store_true"
     )
 
     parser.add_argument(
-        "-r",
-        "--recipients",
-        help="Show the recipients",
-        action="store_true"
+        "-r", "--recipients", help="Show the recipients", action="store_true"
     )
 
     parser.add_argument(
-        "-v",
-        "--version",
-        help="Show the current version.",
-        action="store_true"
+        "-v", "--version", help="Show the current version.", action="store_true"
     )
 
     return parser
