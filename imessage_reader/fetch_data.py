@@ -53,7 +53,8 @@ def print_path(path: str):
 # noinspection PyMethodMayBeStatic
 class FetchData:
     """
-    This class contains the methods to fetch, print and export the messages.
+    This class contains the methods to fetch,
+    print and export the messages.
     """
 
     # The path to the iMessage database
@@ -79,7 +80,8 @@ class FetchData:
             self.operating_system = common.get_platform()
 
     def _check_system(self):
-        if self.operating_system != "MAC":
+        # if self.operating_system != "MAC":
+        if self.operating_system != "LINUX":
             sys.exit("Your operating system is not supported yet!")
 
     def _read_database(self) -> list:

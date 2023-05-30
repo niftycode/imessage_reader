@@ -56,7 +56,9 @@ def evaluate(args):
     Parse arguments from sys.argv and perform the appropriate actions.
     :param args: The user's input
     """
+
     data = fetch_data.FetchData()
+
     if args.version:
         info.app_info()
     elif args.file:
