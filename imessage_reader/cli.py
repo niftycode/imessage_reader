@@ -6,13 +6,20 @@ cli.py
 Entrypoint to the command line interface.
 Python 3.8+
 Date created: October 15th, 2020
-Date modified: April 9th, 2023
+Date modified: May 30th, 2023
 """
 
 import argparse
+import os
+import sys
+
+from os.path import expanduser
 
 from imessage_reader import fetch_data
 from imessage_reader import info
+
+
+MACOS_DB_PATH = expanduser("~") + "/Library/Messages/chat.db"
 
 
 def get_parser() -> argparse.ArgumentParser:
@@ -21,8 +28,41 @@ def get_parser() -> argparse.ArgumentParser:
     Returns:
         argparse.ArgumentParser: parser
     """
+
     parser = argparse.ArgumentParser(
-        description="A tool to fetch imessages from the chat.db (macOS)."
+        description="A tool to fetch messages from the chat.db (macOS)."
+    )
+
+    parser.add_argument(
+        "-p",
+        "--path",
+        type=str,
+        nargs="?",
+        const=MACOS_DB_PATH,
+        default=MACOS_DB_PATH,
+        help="Path to the database file"
+    )
+
+    parser.add_argument(
+        "-o",
+        "--output",
+        nargs="?",
+        default="nothing",
+        help="e = Excel, s = SQLite, r = Show recipients"
+    )
+
+    return parser
+
+
+'''
+def get_parser() -> argparse.ArgumentParser:
+    """Create the argument parser
+
+    Returns:
+        argparse.ArgumentParser: parser
+    """
+    parser = argparse.ArgumentParser(
+        description="A tool to fetch messages from the chat.db file."
     )
 
     parser.add_argument(
@@ -49,6 +89,7 @@ def get_parser() -> argparse.ArgumentParser:
     )
 
     return parser
+'''
 
 
 def evaluate(args):
@@ -57,12 +98,16 @@ def evaluate(args):
     :param args: The user's input
     """
 
+    # New code goes here...
+    print(args)
+
+    '''
     data = fetch_data.FetchData()
 
     if args.version:
         info.app_info()
     elif args.file:
-        fetch_data.print_path(args.file)
+        create_database_path(args.file)
     elif args.excel:
         data.show_user_txt("excel")
     elif args.sqlite:
@@ -71,6 +116,17 @@ def evaluate(args):
         data.show_user_txt("recipients")
     else:
         data.show_user_txt("nothing")
+    '''
+
+
+def create_database_path(path: str):
+    # if os.path.exists(file_path):
+    # file or directory exists
+    if os.path.isdir(path):
+        db_path = path + "chat.db"
+        print(db_path)
+    else:
+        sys.exit("Path doesn't exist! Exit program.")
 
 
 def main():

@@ -21,8 +21,8 @@ from imessage_reader import common, create_sqlite, write_excel, data_container
 # logging.basicConfig(level=logging.DEBUG)
 logging.basicConfig(level=logging.INFO)
 
-# The path to the iMessage database
-DB_PATH = expanduser("~") + "/Library/Messages/chat.db"
+# The path to the iMessage database on macOS
+MACOS_DB_PATH = expanduser("~") + "/Library/Messages/chat.db"
 
 # The SQL command
 SQL_CMD = (
@@ -40,17 +40,17 @@ SQL_CMD = (
 )
 
 
+# TODO: This is for testing only! Delete this in upcoming version!
 def print_path(path: str):
     if os.path.isdir(path):
+        print(path)
         print("Path exist!")
     else:
-        print("Wrong path!")
-
-    # if os.path.exists(file_path):
-    # file or directory exists
+        print(path)
+        print("Path doesn't exist!")
 
 
-# noinspection PyMethodMayBeStatic
+# # noinspection PyMethodMayBeStatic
 class FetchData:
     """
     This class contains the methods to fetch,
@@ -58,7 +58,7 @@ class FetchData:
     """
 
     # The path to the iMessage database
-    DB_PATH = expanduser("~") + "/Library/Messages/chat.db"
+    MACOS_DB_PATH = expanduser("~") + "/Library/Messages/chat.db"
 
     # The SQL command
     SQL_CMD = (
@@ -80,9 +80,13 @@ class FetchData:
             self.operating_system = common.get_platform()
 
     def _check_system(self):
+        # TODO: Change this later (So, it can be used on Linux and Mac machines.)
         # if self.operating_system != "MAC":
         if self.operating_system != "LINUX":
             sys.exit("Your operating system is not supported yet!")
+
+    def validate_path(self):
+        pass
 
     def _read_database(self) -> list:
         """
@@ -90,14 +94,14 @@ class FetchData:
         :return: List containing the user id, messages, the service and the account
         """
 
-        rval = common.fetch_db_data(self.DB_PATH, self.SQL_CMD)
+        rval = common.fetch_db_data(self.MACOS_DB_PATH, self.SQL_CMD)
 
         data = []
         for row in rval:
             text = row[0]
             if row[7] == 1:
                 text = "<Message with no text, but an attachment.>"
-            # the chatdb has some weird behavior where sometimes the text value is None
+            # the chat.db has some weird behavior where sometimes the text value is None
             # and the text string is buried in a binary blob under the attributedBody field.
             if text is None and row[6] is not None:
                 try:

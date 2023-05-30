@@ -18,7 +18,7 @@ VERSION = "0.5.1"
 
 class Platform(Enum):
     """
-    An enum used to indicate the system's operating system
+    An enum used to indicate the running operating system
     """
 
     OTHER = 0
@@ -55,4 +55,4 @@ def fetch_db_data(db, command) -> list:
         cur.execute(command)
         return cur.fetchall()
     except Exception as e:
-        sys.exit("Error reading the database: %s" % e)
+        sys.exit(f"Error reading the database: {e}")
