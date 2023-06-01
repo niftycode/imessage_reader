@@ -29,8 +29,9 @@ class Platform(Enum):
 
 def get_platform() -> str:
     """
-    Get the current operating system.
-    :return: The operating system this program is running on
+    Get the current operating system
+    Returns:
+        object: The operating system this program is running on
     """
     system = platform.system()
     if system == "Linux":
@@ -44,10 +45,13 @@ def get_platform() -> str:
 
 def fetch_db_data(db, command) -> list:
     """
-    Send queries to the sqlite database and return the results.
-    :param db: The path to the database.
-    :param command: The Sqlite command.
-    :return: Data from the database
+    Send queries to the sqlite database and return the results
+    Args:
+        db: The path to the database
+        command: The Sqlite command
+
+    Returns: Data from the database
+
     """
     try:
         conn = sqlite3.connect(db)
