@@ -1,6 +1,13 @@
 CHANGELOG
 =========
 
+[0.6.0]-2023-06-04
+-------------------
+
+- The user can now specify a path to the chat.db file.
+- This program can be used on a Linux machine.
+- The default output directory for the Excel or the SQLite3 file is now the Documents directory.
+
 [0.5.0]-2023-03-07
 -------------------
 

@@ -5,8 +5,7 @@ series [How to Contribute to an Open Source Project on GitHub](https://egghead.i
 
 ## Reporting issues and providing feedback
 
-If you find any bugs, be sure to open up an issue. You can also send me an
-email: [py@bodo-schoenfeld.de](mailto:py@bodo-schoenfeld.de).
+If you find any bugs, be sure to open up an issue. Or you email me: [py@bodo-schoenfeld.de](mailto:py@bodo-schoenfeld.de).
 
 ## Development Dependencies
 

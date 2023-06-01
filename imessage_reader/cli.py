@@ -64,8 +64,9 @@ def get_parser() -> argparse.ArgumentParser:
 
 def check_path_to_database(args):
     """
-    Parse arguments from sys.argv and perform the appropriate actions.
-    :param args: The user's input
+    Parse arguments from sys.argv and invoke the evaluate method.
+    Args:
+        args: The user's input
     """
     if args.path == MACOS_DB_PATH:
         evaluate(MACOS_DB_PATH, args.output, args.version)
@@ -77,8 +78,14 @@ def check_path_to_database(args):
 
 
 def evaluate(path: str, output: str, version: bool):
+    """
+    Evaluate the given options and perform the appropriate actions.
+    Args:
+        path: Path to the chat.db file
+        output: Create an Excel/SQLite3 file or show the recipients
+        version: Specify if the version of this program should be shown
+    """
     data = fetch_data.FetchData(path, output)
-    print(f"{path}, {output}")
 
     if version:
         info.app_info()
