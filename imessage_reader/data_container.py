@@ -29,7 +29,7 @@ class MessageData:
     def __str__(self):
         """
         String representation
-        :return: String representation of this object
+        :return: The representation of this object
         """
         return (
             f"user id:\t\t{self.user_id}\n"

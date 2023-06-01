@@ -65,5 +65,5 @@ class CreateDatabase:
 
         print()
         print(">>> SQLite database successfully created! <<<")
-        print("You find the Database in your Desktop folder.")
+        print("You find the Database in your Documents folder.")
         print()

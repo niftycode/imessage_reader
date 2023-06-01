@@ -121,7 +121,7 @@ class ExelWriter:
             )
             print()
             print(">>> Excel file successfully created! <<<")
-            print("You find the Excel file in your Desktop folder.")
+            print("You find the Excel file in your Documents folder.")
             print()
         except IOError as e:
             print(">>> Cannot write Excel file! <<<")

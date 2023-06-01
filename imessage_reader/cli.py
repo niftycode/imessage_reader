@@ -6,43 +6,50 @@ cli.py
 Entrypoint to the command line interface.
 Python 3.8+
 Date created: October 15th, 2020
-Date modified: April 30th, 2021
+Date modified: May 30th, 2023
 """
 
 import argparse
+import os
+import sys
+
+from os.path import expanduser
 
 from imessage_reader import fetch_data
 from imessage_reader import info
 
 
+# Path to the chat.db file on macOS
+MACOS_DB_PATH = expanduser("~") + "/Library/Messages/chat.db"
+
+
 def get_parser() -> argparse.ArgumentParser:
+    """Create the argument parser
+
+    Returns:
+        argparse.ArgumentParser: parser
     """
-    Create a command line parser.
-    :return:
-    """
+
     parser = argparse.ArgumentParser(
-        description="A tool to fetch imessages " "from the chat.db (macOS)."
+        description="A tool to fetch messages from the chat.db file."
     )
 
     parser.add_argument(
-        "-e",
-        "--excel",
-        help="Create Excel file containing user id and messages.",
-        action="store_true",
+        "-p",
+        "--path",
+        type=str,
+        nargs="?",
+        const=MACOS_DB_PATH,
+        default=MACOS_DB_PATH,
+        help="Path to the database file"
     )
 
     parser.add_argument(
-        "-s",
-        "--sqlite",
-        help="Create a SQLite3 database",
-        action="store_true"
-    )
-
-    parser.add_argument(
-        "-r",
-        "--recipients",
-        help="Show the recipients",
-        action="store_true"
+        "-o",
+        "--output",
+        nargs="?",
+        default="nothing",
+        help="e = Excel, s = SQLite, r = Show recipients"
     )
 
     parser.add_argument(
@@ -55,19 +62,32 @@ def get_parser() -> argparse.ArgumentParser:
     return parser
 
 
-def evaluate(args):
+def check_path_to_database(args):
     """
     Parse arguments from sys.argv and perform the appropriate actions.
     :param args: The user's input
     """
-    data = fetch_data.FetchData()
-    if args.version:
+    if args.path == MACOS_DB_PATH:
+        evaluate(MACOS_DB_PATH, args.output, args.version)
+    elif os.path.isdir(args.path):
+        db_path = args.path + "/chat.db"
+        evaluate(db_path, args.output, args.version)
+    else:
+        sys.exit("Path doesn't exist! Exit program.")
+
+
+def evaluate(path: str, output: str, version: bool):
+    data = fetch_data.FetchData(path, output)
+    print(f"{path}, {output}")
+
+    if version:
         info.app_info()
-    elif args.excel:
+
+    if output == "e" or output == "excel":
         data.show_user_txt("excel")
-    elif args.sqlite:
+    elif output == "s" or output == "sqlite" or output == "sqlite3":
         data.show_user_txt("sqlite")
-    elif args.recipients:
+    elif output == "r" or output == "recipients":
         data.show_user_txt("recipients")
     else:
         data.show_user_txt("nothing")
@@ -79,7 +99,7 @@ def main():
     """
     parser = get_parser()
     args = parser.parse_args()
-    evaluate(args)
+    check_path_to_database(args)
 
 
 if __name__ == "__main__":
