@@ -19,6 +19,7 @@ from imessage_reader import fetch_data
 from imessage_reader import info
 
 
+# Path to the chat.db file on macOS
 MACOS_DB_PATH = expanduser("~") + "/Library/Messages/chat.db"
 
 
@@ -30,7 +31,7 @@ def get_parser() -> argparse.ArgumentParser:
     """
 
     parser = argparse.ArgumentParser(
-        description="A tool to fetch messages from the chat.db (macOS)."
+        description="A tool to fetch messages from the chat.db file."
     )
 
     parser.add_argument(
@@ -51,82 +52,45 @@ def get_parser() -> argparse.ArgumentParser:
         help="e = Excel, s = SQLite, r = Show recipients"
     )
 
+    parser.add_argument(
+        "-v",
+        "--version",
+        help="Show the current version.",
+        action="store_true"
+    )
+
     return parser
 
 
-'''
-def get_parser() -> argparse.ArgumentParser:
-    """Create the argument parser
-
-    Returns:
-        argparse.ArgumentParser: parser
-    """
-    parser = argparse.ArgumentParser(
-        description="A tool to fetch messages from the chat.db file."
-    )
-
-    parser.add_argument(
-        "-f", "--file", type=str, required=False, help="Path to the chat.db file."
-    )
-
-    parser.add_argument(
-        "-e",
-        "--excel",
-        help="Create Excel file containing user id and messages.",
-        action="store_true",
-    )
-
-    parser.add_argument(
-        "-s", "--sqlite", help="Create a SQLite3 database", action="store_true"
-    )
-
-    parser.add_argument(
-        "-r", "--recipients", help="Show the recipients", action="store_true"
-    )
-
-    parser.add_argument(
-        "-v", "--version", help="Show the current version.", action="store_true"
-    )
-
-    return parser
-'''
-
-
-def evaluate(args):
+def check_path_to_database(args):
     """
     Parse arguments from sys.argv and perform the appropriate actions.
     :param args: The user's input
     """
+    if args.path == MACOS_DB_PATH:
+        evaluate(MACOS_DB_PATH, args.output, args.version)
+    elif os.path.isdir(args.path):
+        db_path = args.path + "/chat.db"
+        evaluate(db_path, args.output, args.version)
+    else:
+        sys.exit("Path doesn't exist! Exit program.")
 
-    # New code goes here...
-    print(args)
 
-    '''
-    data = fetch_data.FetchData()
+def evaluate(path: str, output: str, version: bool):
+    data = fetch_data.FetchData(path, output)
+    print(f"{path}, {output}")
 
-    if args.version:
+    if version:
         info.app_info()
-    elif args.file:
-        create_database_path(args.file)
-    elif args.excel:
+
+    if output == "e" or output == "excel":
         data.show_user_txt("excel")
-    elif args.sqlite:
+    elif output == "s" or output == "sqlite" or output == "sqlite3":
         data.show_user_txt("sqlite")
-    elif args.recipients:
+    elif output == "r" or output == "recipients":
         data.show_user_txt("recipients")
     else:
         data.show_user_txt("nothing")
-    '''
-
-
-def create_database_path(path: str):
-    # if os.path.exists(file_path):
-    # file or directory exists
-    if os.path.isdir(path):
-        db_path = path + "chat.db"
-        print(db_path)
-    else:
-        sys.exit("Path doesn't exist! Exit program.")
 
 
 def main():
@@ -135,7 +99,7 @@ def main():
     """
     parser = get_parser()
     args = parser.parse_args()
-    evaluate(args)
+    check_path_to_database(args)
 
 
 if __name__ == "__main__":

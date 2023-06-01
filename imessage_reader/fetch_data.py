@@ -9,7 +9,8 @@ Date created: October 8th, 2020
 Date modified: April 9th, 2023
 """
 
-import os
+# TODO: Delete old imports
+# import os
 import sys
 import logging
 
@@ -20,9 +21,6 @@ from imessage_reader import common, create_sqlite, write_excel, data_container
 
 # logging.basicConfig(level=logging.DEBUG)
 logging.basicConfig(level=logging.INFO)
-
-# The path to the iMessage database on macOS
-MACOS_DB_PATH = expanduser("~") + "/Library/Messages/chat.db"
 
 # The SQL command
 SQL_CMD = (
@@ -40,16 +38,6 @@ SQL_CMD = (
 )
 
 
-# TODO: This is for testing only! Delete this in upcoming version!
-def print_path(path: str):
-    if os.path.isdir(path):
-        print(path)
-        print("Path exist!")
-    else:
-        print(path)
-        print("Path doesn't exist!")
-
-
 # # noinspection PyMethodMayBeStatic
 class FetchData:
     """
@@ -58,7 +46,7 @@ class FetchData:
     """
 
     # The path to the iMessage database
-    MACOS_DB_PATH = expanduser("~") + "/Library/Messages/chat.db"
+    # MACOS_DB_PATH = expanduser("~") + "/Library/Messages/chat.db"
 
     # The SQL command
     SQL_CMD = (
@@ -75,7 +63,9 @@ class FetchData:
         "JOIN handle on message.handle_id=handle.ROWID"
     )
 
-    def __init__(self, system=None):
+    def __init__(self, db_path: str, output: str, system=None):
+        self.db_path = db_path
+        self.output = output
         if system is None:
             self.operating_system = common.get_platform()
 
@@ -94,7 +84,7 @@ class FetchData:
         :return: List containing the user id, messages, the service and the account
         """
 
-        rval = common.fetch_db_data(self.MACOS_DB_PATH, self.SQL_CMD)
+        rval = common.fetch_db_data(self.db_path, self.SQL_CMD)
 
         data = []
         for row in rval:
@@ -114,10 +104,10 @@ class FetchData:
                     # this is equivalent to text[0:1] == b'\x81'
                     if text[0] == 129:
                         length = int.from_bytes(text[1:3], "little")
-                        text = text[3 : length + 3]
+                        text = text[3: length + 3]
                     else:
                         length = text[0]
-                        text = text[1 : length + 1]
+                        text = text[1: length + 1]
                     text = text.decode()
 
                     logging.debug(text)
@@ -166,7 +156,8 @@ class FetchData:
         Export data (write Excel file)
         :param data: message objects containing user id, message, date, service, account
         """
-        file_path = expanduser("~") + "/Desktop/"
+        file_path = expanduser("~") + "/Documents/"
+        # TODO: Exception handling
         ew = write_excel.ExelWriter(data, file_path)
         ew.write_data()
 
@@ -175,7 +166,8 @@ class FetchData:
         Export data (create SQLite3 database)
         :param data: message objects containing user id, message, date, service, account
         """
-        file_path = expanduser("~") + "/Desktop/"
+        file_path = expanduser("~") + "/Documents/"
+        # TODO: Exception handling
         cd = create_sqlite.CreateDatabase(data, file_path)
         cd.create_sqlite_db()
 
