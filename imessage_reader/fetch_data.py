@@ -22,21 +22,6 @@ from imessage_reader import common, create_sqlite, write_excel, data_container
 # logging.basicConfig(level=logging.DEBUG)
 logging.basicConfig(level=logging.INFO)
 
-# The SQL command
-SQL_CMD = (
-    "SELECT "
-    "text, "
-    "datetime((date / 1000000000) + 978307200, 'unixepoch', 'localtime'),"
-    "handle.id, "
-    "handle.service, "
-    "message.destination_caller_id, "
-    "message.is_from_me, "
-    "message.attributedBody, "
-    "message.cache_has_attachments "
-    "FROM message "
-    "JOIN handle on message.handle_id=handle.ROWID"
-)
-
 
 # # noinspection PyMethodMayBeStatic
 class FetchData:
@@ -64,6 +49,12 @@ class FetchData:
     )
 
     def __init__(self, db_path: str, output: str, system=None):
+        """Constructor method
+
+        :param db_path: Path to the chat.db file
+        :param output: Output format (Excel or SQLite3)
+        :param system: Operating System
+        """
         self.db_path = db_path
         self.output = output
         if system is None:
@@ -79,9 +70,9 @@ class FetchData:
         pass
 
     def _read_database(self) -> list:
-        """
-        Fetch data from the database and store the data in a list.
-        :return: List containing the user id, messages, the service and the account
+        """Fetch data from the database and store the data in a list.
+
+        :return: list containing the user id, messages, the service and the account
         """
 
         rval = common.fetch_db_data(self.db_path, self.SQL_CMD)
@@ -123,9 +114,9 @@ class FetchData:
         return data
 
     def show_user_txt(self, export: str):
-        """
-        Invoke _read_database(), print fetched data and export data.
-        This method is for CLI usage.
+        """Invoke _read_database(), print fetched data and export data.
+        (This method is for CLI usage.)
+
         :param export: Determine whether to export data
         """
 
@@ -152,8 +143,8 @@ class FetchData:
             self._get_recipients()
 
     def _export_excel(self, data: list):
-        """
-        Export data (write Excel file)
+        """Export data (write Excel file)
+
         :param data: message objects containing user id, message, date, service, account
         """
         file_path = expanduser("~") + "/Documents/"
@@ -162,8 +153,8 @@ class FetchData:
         ew.write_data()
 
     def _export_sqlite(self, data: list):
-        """
-        Export data (create SQLite3 database)
+        """Export data (create SQLite3 database).
+
         :param data: message objects containing user id, message, date, service, account
         """
         file_path = expanduser("~") + "/Documents/"
@@ -172,8 +163,7 @@ class FetchData:
         cd.create_sqlite_db()
 
     def _get_recipients(self):
-        """
-        Create a list containing all recipients and
+        """Create a list containing all recipients and
         show the recipients in the command line.
         """
         fetched_data = self._read_database()
@@ -190,10 +180,10 @@ class FetchData:
             print(recipient)
 
     def get_messages(self) -> list:
-        """
-        Create a list with tuples (user id, message, date, service, account, is_from_me)
-        This method is for module usage.
-        :return: List with tuples (user id, message, date, service, account, is_from_me)
+        """Create a list with tuples (user id, message, date, service, account, is_from_me)
+        (This method is for module usage.)
+
+        :return: list with tuples (user id, message, date, service, account, is_from_me)
         """
         fetched_data = self._read_database()
 

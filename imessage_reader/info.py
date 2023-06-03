@@ -14,8 +14,7 @@ VERSION = common.VERSION
 
 
 def app_info():
-    """
-    Show app infos (Version & License)
+    """Show app infos (Version & License)
     """
     print("\n\n    ##### A Python script to read iMessage data #####")
     print("    #              Created by niftycode             #")

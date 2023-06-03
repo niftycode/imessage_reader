@@ -14,8 +14,7 @@ from dataclasses import dataclass
 
 @dataclass
 class MessageData:
-    """
-    This dataclass is the store for the data:
+    """This dataclass is the store for the data:
     user id, text, date, service and account (caller id).
     """
 
@@ -27,9 +26,9 @@ class MessageData:
     is_from_me: int
 
     def __str__(self):
-        """
-        String representation
-        :return: The representation of this object
+        """String representation
+
+        :return: the representation of this object
         """
         return (
             f"user id:\t\t{self.user_id}\n"

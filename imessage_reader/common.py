@@ -5,7 +5,7 @@
 common.py
 Python 3.8+
 Date created: June 14th, 2020
-Date modified: February 26th, 2022
+Date modified: June 3rd, 2023
 """
 
 import platform
@@ -17,8 +17,7 @@ VERSION = "0.6.0"
 
 
 class Platform(Enum):
-    """
-    An enum used to indicate the running operating system
+    """An enum used to indicate the running operating system
     """
 
     OTHER = 0
@@ -28,10 +27,9 @@ class Platform(Enum):
 
 
 def get_platform() -> str:
-    """
-    Get the current operating system
-    Returns:
-        object: The operating system this program is running on
+    """Get the current operating system.
+
+    :return: the operating system this program is running on
     """
     system = platform.system()
     if system == "Linux":
@@ -44,14 +42,11 @@ def get_platform() -> str:
 
 
 def fetch_db_data(db, command) -> list:
-    """
-    Send queries to the sqlite database and return the results
-    Args:
-        db: The path to the database
-        command: The Sqlite command
+    """Send queries to the sqlite database and return the results.
 
-    Returns: Data from the database
-
+    :param db: the path to the database
+    :param command: the SQL command
+    :return: data from the database
     """
     try:
         conn = sqlite3.connect(db)

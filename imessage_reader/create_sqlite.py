@@ -12,21 +12,21 @@ import sqlite3
 
 
 class CreateDatabase:
-    """This class manages the export to SQLite"""
+    """This class manages the export to SQLite.
+    """
 
     def __init__(self, imessage_data: list, file_path: str):
-        """
-        init function of this class
-        :param imessage_data: List with MessageData objects
+        """Constructor method
+
+        :param imessage_data: list with MessageData objects
                 containing user id, text, date, service and account
-        :param file_path: The path to the location of the Excel file
+        :param file_path: the path to the location of the Excel file
         """
         self.imessage_data = imessage_data
         self.file_path = file_path
 
     def create_sqlite_db(self):
-        """
-        Create a SQLite3 database in the Desktop folder.
+        """Create a SQLite3 database in the Desktop folder.
         Add user, text, date and service to the database.
         """
         database = self.file_path + "iMessage-Data.sqlite"

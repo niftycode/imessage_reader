@@ -14,23 +14,22 @@ from openpyxl.styles import Font
 
 
 class ExelWriter:
-    """
-    This class manages the export to excel.
+    """This class manages the export to excel.
     """
 
     def __init__(self, imessage_data: list, file_path: str):
-        """
-        The init function of this class
-        :param imessage_data: List with MessageData objects
+        """Constructor method
+
+        :param imessage_data: list with MessageData objects
                 containing user id, text, date, service and account
-        :param file_path: The path to the location of the Excel file
+        :param file_path: path to the location of the Excel file
         """
         self.imessage_data = imessage_data
         self.file_path = file_path
 
     def write_data(self):
-        """
-        Write data (user id, text, date, service, account, is_from_me) to Excel
+        """Write data to Excel
+        (user id, text, date, service, account, is_from_me)
         """
 
         users = []

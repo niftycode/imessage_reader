@@ -20,16 +20,15 @@ from imessage_reader import info
 
 
 # Path to the chat.db file on macOS
+# Note: This path is used if the user does not specify a path.
 MACOS_DB_PATH = expanduser("~") + "/Library/Messages/chat.db"
 
 
 def get_parser() -> argparse.ArgumentParser:
     """Create the argument parser
 
-    Returns:
-        argparse.ArgumentParser: parser
+    :rtype: object
     """
-
     parser = argparse.ArgumentParser(
         description="A tool to fetch messages from the chat.db file."
     )
@@ -62,11 +61,10 @@ def get_parser() -> argparse.ArgumentParser:
     return parser
 
 
-def check_path_to_database(args):
-    """
-    Parse arguments from sys.argv and invoke the evaluate method.
-    Args:
-        args: The user's input
+def check_database_path(args):
+    """ Parse arguments from sys.argv and invoke the evaluate method.
+
+    :param args: the user's input
     """
     if args.path == MACOS_DB_PATH:
         evaluate(MACOS_DB_PATH, args.output, args.version)
@@ -78,12 +76,11 @@ def check_path_to_database(args):
 
 
 def evaluate(path: str, output: str, version: bool):
-    """
-    Evaluate the given options and perform the appropriate actions.
-    Args:
-        path: Path to the chat.db file
-        output: Create an Excel/SQLite3 file or show the recipients
-        version: Specify if the version of this program should be shown
+    """Evaluate the given options and perform the appropriate actions.
+
+    :param path: path to the chat.db file
+    :param output: create an Excel/SQLite3 file
+    :param version: specify if the version of this program should be shown
     """
     data = fetch_data.FetchData(path, output)
 
@@ -101,12 +98,11 @@ def evaluate(path: str, output: str, version: bool):
 
 
 def main():
-    """
-    Entrypoint to the command-line interface (CLI).
+    """Entrypoint to the command-line interface (CLI).
     """
     parser = get_parser()
     args = parser.parse_args()
-    check_path_to_database(args)
+    check_database_path(args)
 
 
 if __name__ == "__main__":
