@@ -2,7 +2,7 @@
 
 """
 Fetch data, print data and export data to excel.
-Python 3.8+
+Python 3.9+
 Author: niftycode
 Modified by: thecircleisround
 Date created: October 8th, 2020

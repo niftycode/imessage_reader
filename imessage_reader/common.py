@@ -3,7 +3,7 @@
 
 """
 common.py
-Python 3.8+
+Python 3.9+
 Date created: June 14th, 2020
 Date modified: June 3rd, 2023
 """

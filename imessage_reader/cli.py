@@ -4,9 +4,9 @@
 """
 cli.py
 Entrypoint to the command line interface.
-Python 3.8+
+Python 3.9+
 Date created: October 15th, 2020
-Date modified: May 30th, 2023
+Date modified: June 2nd, 2023
 """
 
 import argparse

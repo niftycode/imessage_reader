@@ -3,7 +3,7 @@
 
 """
 Create a SQLite3 database containing iMessage data (user id, text, date, service)
-Python 3.8+
+Python 3.9+
 Date created: April 30th, 2021
 Date modified: August 28th, 2021
 """

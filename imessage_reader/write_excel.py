@@ -2,7 +2,7 @@
 
 """
 Write Excel file containing iMessage data (user id, text, date, service, account)
-Python 3.8+
+Python 3.9+
 Date created: October 1st, 2020
 Date modified: August 28th, 2021
 """

@@ -2,7 +2,7 @@
 
 """
 App info, license, version
-Python 3.8+
+Python 3.9+
 Date created: June 14th, 2020
 Date modified: February 22nd, 2022
 """
