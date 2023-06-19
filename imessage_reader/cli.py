@@ -48,7 +48,14 @@ def get_parser() -> argparse.ArgumentParser:
         "--output",
         nargs="?",
         default="nothing",
-        help="e = Excel, s = SQLite, r = Show recipients"
+        help="Specify the output: e = Excel, s = SQLite"
+    )
+
+    parser.add_argument(
+        "-r",
+        "--recipients",
+        help="Show the recipients",
+        action="store_true"
     )
 
     parser.add_argument(
@@ -67,19 +74,20 @@ def check_database_path(args):
     :param args: the user's input
     """
     if args.path == MACOS_DB_PATH:
-        evaluate(MACOS_DB_PATH, args.output, args.version)
+        evaluate(MACOS_DB_PATH, args.output, args.recipients, args.version)
     elif os.path.isdir(args.path):
         db_path = args.path + "/chat.db"
-        evaluate(db_path, args.output, args.version)
+        evaluate(db_path, args.output, args.recipients, args.version)
     else:
         sys.exit("Path doesn't exist! Exit program.")
 
 
-def evaluate(path: str, output: str, version: bool):
+def evaluate(path: str, output: str, recipients: bool, version: bool):
     """Evaluate the given options and perform the appropriate actions.
 
     :param path: path to the chat.db file
     :param output: create an Excel/SQLite3 file
+    :param recipients: recipients of the messages
     :param version: specify if the version of this program should be shown
     """
     data = fetch_data.FetchData(path, output)
@@ -88,12 +96,14 @@ def evaluate(path: str, output: str, version: bool):
         info.app_info()
         sys.exit()
 
+    if recipients:
+        data.show_user_txt("recipients")
+        sys.exit()
+
     if output == "e" or output == "excel":
         data.show_user_txt("excel")
     elif output == "s" or output == "sqlite" or output == "sqlite3":
         data.show_user_txt("sqlite")
-    elif output == "r" or output == "recipients":
-        data.show_user_txt("recipients")
     else:
         data.show_user_txt("nothing")
 
