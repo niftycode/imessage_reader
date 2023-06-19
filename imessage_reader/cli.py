@@ -86,6 +86,7 @@ def evaluate(path: str, output: str, version: bool):
 
     if version:
         info.app_info()
+        sys.exit()
 
     if output == "e" or output == "excel":
         data.show_user_txt("excel")

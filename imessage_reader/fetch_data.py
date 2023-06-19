@@ -63,7 +63,7 @@ class FetchData:
     def _check_system(self):
         # TODO: Change this later (So, it can be used on Linux and Mac machines.)
         # if self.operating_system != "MAC":
-        if self.operating_system != "LINUX":
+        if self.operating_system == "WINDOWS":
             sys.exit("Your operating system is not supported yet!")
 
     def validate_path(self):
