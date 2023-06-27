@@ -1,16 +1,14 @@
 #!/usr/bin/env python3
 
 """
-Fetch data, print data and export data to excel.
+Fetch data, print data, show recipients or export data.
 Python 3.9+
 Author: niftycode
 Modified by: thecircleisround
 Date created: October 8th, 2020
-Date modified: April 9th, 2023
+Date modified: June 27th, 2023
 """
 
-# TODO: Delete old imports
-# import os
 import sys
 import logging
 
@@ -23,15 +21,12 @@ from imessage_reader import common, create_sqlite, write_excel, data_container
 logging.basicConfig(level=logging.INFO)
 
 
-# # noinspection PyMethodMayBeStatic
+# noinspection PyMethodMayBeStatic
 class FetchData:
     """
     This class contains the methods to fetch,
     print and export the messages.
     """
-
-    # The path to the iMessage database
-    # MACOS_DB_PATH = expanduser("~") + "/Library/Messages/chat.db"
 
     # The SQL command
     SQL_CMD = (
@@ -48,26 +43,20 @@ class FetchData:
         "JOIN handle on message.handle_id=handle.ROWID"
     )
 
-    def __init__(self, db_path: str, output: str, system=None):
+    def __init__(self, db_path: str, system=None):
         """Constructor method
 
         :param db_path: Path to the chat.db file
-        :param output: Output format (Excel or SQLite3)
         :param system: Operating System
         """
         self.db_path = db_path
-        self.output = output
         if system is None:
             self.operating_system = common.get_platform()
 
     def _check_system(self):
-        # TODO: Change this later (So, it can be used on Linux and Mac machines.)
-        # if self.operating_system != "MAC":
+        # TODO: Change this later (So, it can be used on Windows too.)
         if self.operating_system == "WINDOWS":
             sys.exit("Your operating system is not supported yet!")
-
-    def validate_path(self):
-        pass
 
     def _read_database(self) -> list:
         """Fetch data from the database and store the data in a list.
@@ -139,6 +128,7 @@ class FetchData:
         if export == "sqlite":
             self._export_sqlite(fetched_data)
 
+        # Show all recipients
         if export == "recipients":
             self._get_recipients()
 
@@ -179,6 +169,7 @@ class FetchData:
         for recipient in recipients:
             print(recipient)
 
+    '''
     def get_messages(self) -> list:
         """Create a list with tuples (user id, message, date, service, account, is_from_me)
         (This method is for module usage.)
@@ -205,3 +196,4 @@ class FetchData:
         data = list(zip(users, messages, dates, service, account, is_from_me))
 
         return data
+'''

@@ -48,7 +48,7 @@ def get_parser() -> argparse.ArgumentParser:
         "--output",
         nargs="?",
         default="nothing",
-        help="Specify the output: e = Excel, s = SQLite"
+        help="Specify the output: e => Excel, s => SQLite"
     )
 
     parser.add_argument(
@@ -90,7 +90,7 @@ def evaluate(path: str, output: str, recipients: bool, version: bool):
     :param recipients: recipients of the messages
     :param version: specify if the version of this program should be shown
     """
-    data = fetch_data.FetchData(path, output)
+    data = fetch_data.FetchData(path)
 
     if version:
         info.app_info()
