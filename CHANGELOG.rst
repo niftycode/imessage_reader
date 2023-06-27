@@ -1,7 +1,7 @@
 CHANGELOG
 =========
 
-[0.6.0]-2023-06-04
+[0.6.0]-2023-06-27
 -------------------
 
 - The user can now specify a path to the chat.db file.

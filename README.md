@@ -2,8 +2,7 @@
 
 ![](img/license-MIT-green.svg) ![](img/python-3.9-blue.svg) ![](https://img.shields.io/github/last-commit/niftycode/imessage_reader.svg?style=flat) ![](https://img.shields.io/github/issues/niftycode/imessage_reader.svg?style=flat)  ![](https://img.shields.io/pypi/v/imessage_reader)
 
-This is a forensic tool written in Python 3. Use this tool to fetch the content (phone numbers, email addresses,
-messages and the account) from the *chat.db* database file on **macOS** (version 10.14 or above).
+This is a forensic tool written in Python 3. Use this tool to fetch the content (phone numbers, email addresses, messages and the account) from the *chat.db* database file on **macOS** (version 10.14 or above).
 
 The following information is currently being read from the database:
 
@@ -16,9 +15,7 @@ The following information is currently being read from the database:
 
 ## Background
 
-Received messages (iMessage or SMS) and attachments will be saved in "~/Library/Messages". This directory contains a "
-chat.db" file (SQLite3) with two tables of interest: *handle* and *message*. The *handle* table contains the
-recipients (email address or phone number). The received messages are in the *message* table.
+Received messages (iMessage or SMS) and attachments will be saved in "~/Library/Messages". This directory contains a "chat.db" file (SQLite3) with two tables of interest: *handle* and *message*. The *handle* table contains the recipients (email address or phone number). The received messages are in the *message* table.
 
 ## Note
 
@@ -76,17 +73,17 @@ or
 
 If you only want to see a list of recipients use:
 
-    imessage_reader -o r
+    imessage_reader -r
 
 or
 
-    imessage_reader -o recipients
+    imessage_reader --recipients
 
 **Note**: On **macOS** you need access to the *Library* folder in order to read the iMessage database file ("chat.db"). You can add access (for *Terminal* or *iTerm*) in
 
     > System Preferences > Security & Privacy > Privacy > Full Disk Access
 
-### Specify a PATH and an output argument
+## Specify a PATH and an output argument
 
 You can combine the `-p` with the `-o` option:
 
