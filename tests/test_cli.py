@@ -20,11 +20,9 @@ def test_evaluate(create_parser):
     :param create_parser: The created parser
     """
     args_version = create_parser.parse_args(["--version"])
-    args_excel = create_parser.parse_args(["--excel"])
-    args_sqlite = create_parser.parse_args(["--sqlite"])
     args_recipients = create_parser.parse_args(["--recipients"])
+    args_output = create_parser.parse_args(["--output"])
 
     assert args_version.version is True
-    assert args_excel.excel is True
-    assert args_sqlite.sqlite is True
     assert args_recipients.recipients is True
+    assert args_output.output is None
