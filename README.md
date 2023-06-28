@@ -32,7 +32,7 @@ To run tests install **pytest**:
 
 ## Install
 
-    pip3 install imessage_reader
+    pip3 install imessage-reader
 
 ## Usage (CLI)
 
