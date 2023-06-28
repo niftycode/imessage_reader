@@ -54,4 +54,4 @@ def fetch_db_data(db, command) -> list:
         cur.execute(command)
         return cur.fetchall()
     except Exception as e:
-        sys.exit(f"Error reading the database: {e}")
+        sys.exit(f"Error reading the database: {e}\nDid you specify the correct path?")
