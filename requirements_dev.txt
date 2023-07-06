@@ -1,6 +1,7 @@
 # Develeopment requirements
 -r requirements.txt
 pytest
+pytest-mock
 pytest-cov
 flake8
 setuptools

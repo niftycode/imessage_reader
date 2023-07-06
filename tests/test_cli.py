@@ -26,3 +26,22 @@ def test_evaluate(create_parser):
     assert args_version.version is True
     assert args_recipients.recipients is True
     assert args_output.output is None
+
+
+def test_check_database_path(mocker):
+    mocker.patch(
+        "sys.argv",
+        [
+            "imessage_reader",
+            "--path",
+            "/Users/bodo/Documents",
+            "--output",
+            "e"
+        ],
+    )
+
+    args = cli.get_parser().parse_args()
+    assert args.path == "/Users/bodo/Documents"
+    assert args.output == "e"
+    assert args.recipients is False
+    assert args.version is False

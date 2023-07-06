@@ -22,6 +22,7 @@ setup(
     classifiers=[
         'License :: OSI Approved :: MIT License',
         'Operating System :: MacOS',
+        'Operating System :: POSIX :: Linux',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.9',
         'Programming Language :: Python :: 3.10',

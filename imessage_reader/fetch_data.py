@@ -54,7 +54,7 @@ class FetchData:
             self.operating_system = common.get_platform()
 
     def _check_system(self):
-        # TODO: Change this later (So, it can be used on Windows too.)
+        # TODO: Change this later
         if self.operating_system == "WINDOWS":
             sys.exit("Your operating system is not supported yet!")
 
@@ -169,7 +169,6 @@ class FetchData:
         for recipient in recipients:
             print(recipient)
 
-    '''
     def get_messages(self) -> list:
         """Create a list with tuples (user id, message, date, service, account, is_from_me)
         (This method is for module usage.)
@@ -196,4 +195,3 @@ class FetchData:
         data = list(zip(users, messages, dates, service, account, is_from_me))
 
         return data
-'''
