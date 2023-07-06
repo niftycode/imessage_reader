@@ -30,7 +30,7 @@ setup(
     ],
 
     packages=find_packages(exclude=('tests', 'docs')),
-    python_requires='>=3.8',
+    python_requires='>=3.9',
     entry_points={
         'console_scripts': ['imessage_reader=imessage_reader.cli:main'],
     },

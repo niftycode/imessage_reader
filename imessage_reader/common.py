@@ -5,7 +5,7 @@
 common.py
 Python 3.9+
 Date created: June 14th, 2020
-Date modified: July 3rd, 2023
+Date modified: July 6th, 2023
 """
 
 import platform
@@ -13,7 +13,7 @@ import sqlite3
 import sys
 from enum import Enum
 
-VERSION = "0.6.1"
+VERSION = "0.6.2"
 
 
 class Platform(Enum):
