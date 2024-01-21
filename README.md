@@ -1,3 +1,7 @@
+# Fork Notes
+
+This fork is adding support for fetching group info. Credit to SilasStokes for most of the actual ideas behind this.
+
 # imessage_reader
 
 ![](img/license-MIT-green.svg) ![](img/python-3.9-blue.svg) ![](https://img.shields.io/github/last-commit/niftycode/imessage_reader.svg?style=flat) ![](https://img.shields.io/github/issues/niftycode/imessage_reader.svg?style=flat)  ![](https://img.shields.io/pypi/v/imessage_reader)
