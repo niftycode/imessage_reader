@@ -14,7 +14,7 @@ import logging
 
 from os.path import expanduser
 
-from imessage_reader import common, create_sqlite, write_excel, data_container
+from imessage_reader import common, create_sqlite, write_excel, data_container, write_pandas
 
 
 # logging.basicConfig(level=logging.DEBUG)
@@ -128,9 +128,22 @@ class FetchData:
         if export == "sqlite":
             self._export_sqlite(fetched_data)
 
+        if export == "pandas":
+            self._export_pandas(fetched_data)
+
         # Show all recipients
         if export == "recipients":
             self._get_recipients()
+
+    def _export_pandas(self, data: list):
+        """Exports data (create Pandas DataFrame)
+        
+        :param data: message objects containing user id, message, date, service, account
+        """
+        writer = write_pandas.DataFrameWriter(data)
+        df = writer.to_dataframe()
+        print(df)
+        #return df
 
     def _export_excel(self, data: list):
         """Export data (write Excel file)

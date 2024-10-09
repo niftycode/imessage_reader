@@ -48,7 +48,7 @@ def get_parser() -> argparse.ArgumentParser:
         "--output",
         nargs="?",
         default="nothing",
-        help="Specify the output: e => Excel, s => SQLite"
+        help="Specify the output: e => Excel, s => SQLite, p => Pandas"
     )
 
     parser.add_argument(
@@ -86,7 +86,7 @@ def evaluate(path: str, output: str, recipients: bool, version: bool):
     """Evaluate the given options and perform the appropriate actions.
 
     :param path: path to the chat.db file
-    :param output: create an Excel/SQLite3 file
+    :param output: create an Excel/SQLite3 file, or Pandas DataFrame
     :param recipients: recipients of the messages
     :param version: specify if the version of this program should be shown
     """
@@ -102,6 +102,8 @@ def evaluate(path: str, output: str, recipients: bool, version: bool):
 
     if output == "e" or output == "excel":
         data.show_user_txt("excel")
+    elif output == "p" or output == "pandas":
+        data.show_user_txt("pandas")
     elif output == "s" or output == "sqlite" or output == "sqlite3":
         data.show_user_txt("sqlite")
     else:

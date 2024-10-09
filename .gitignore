@@ -11,3 +11,8 @@ build/
 
 *.pyc
 /htmlcov
+
+bin/
+lib/
+include/
+pyvenv.cfg
