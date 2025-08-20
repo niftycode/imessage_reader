@@ -5,3 +5,5 @@ pytest-mock
 pytest-cov
 flake8
 setuptools
+black
+mypy

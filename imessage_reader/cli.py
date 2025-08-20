@@ -40,7 +40,7 @@ def get_parser() -> argparse.ArgumentParser:
         nargs="?",
         const=MACOS_DB_PATH,
         default=MACOS_DB_PATH,
-        help="Path to the database file"
+        help="Path to the database file",
     )
 
     parser.add_argument(
@@ -48,28 +48,22 @@ def get_parser() -> argparse.ArgumentParser:
         "--output",
         nargs="?",
         default="nothing",
-        help="Specify the output: e => Excel, s => SQLite"
+        help="Specify the output: e => Excel, s => SQLite",
     )
 
     parser.add_argument(
-        "-r",
-        "--recipients",
-        help="Show the recipients",
-        action="store_true"
+        "-r", "--recipients", help="Show the recipients", action="store_true"
     )
 
     parser.add_argument(
-        "-v",
-        "--version",
-        help="Show the current version.",
-        action="store_true"
+        "-v", "--version", help="Show the current version.", action="store_true"
     )
 
     return parser
 
 
 def check_database_path(args):
-    """ Parse arguments from sys.argv and invoke the evaluate method.
+    """Parse arguments from sys.argv and invoke the evaluate method.
 
     :param args: the user's input
     """
@@ -85,8 +79,8 @@ def check_database_path(args):
 def evaluate(path: str, output: str, recipients: bool, version: bool):
     """Evaluate the given options and perform the appropriate actions.
 
-    :param path: path to the chat.db file
-    :param output: create an Excel/SQLite3 file
+    :param path: the path to the chat.db file
+    :param output: creates an Excel/SQLite3 file
     :param recipients: recipients of the messages
     :param version: specify if the version of this program should be shown
     """
@@ -109,8 +103,7 @@ def evaluate(path: str, output: str, recipients: bool, version: bool):
 
 
 def main():
-    """Entrypoint to the command-line interface (CLI).
-    """
+    """Entrypoint to the command-line interface (CLI)."""
     parser = get_parser()
     args = parser.parse_args()
     check_database_path(args)

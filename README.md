@@ -15,7 +15,7 @@ The following information is currently being read from the database:
 
 ## Background
 
-Received messages (iMessage or SMS) and attachments will be saved in "~/Library/Messages". This directory contains a "chat.db" file (SQLite3) with two tables of interest: *handle* and *message*. The *handle* table contains the recipients (email address or phone number). The received messages are in the *message* table.
+Received messages (iMessage or SMS) and attachments will be saved in `~/Library/Messages`. This directory contains a "chat.db" file (SQLite3) with two tables of interest: *handle* and *message*. The *handle* table contains the recipients (email address or phone number). The received messages are in the *message* table.
 
 ## Note
 
@@ -44,7 +44,7 @@ Start the program with:
 
 This will show you all users and messages in the Terminal. If no option (`-p <PATH>`) is specified, the default directory (under macOS) is searched for the chat.db file.
 
-## Specify a PATH as argument
+## Specify a PATH as an argument
 
 A different path to chat.db file can be specified with the `-p` option:
 
@@ -63,7 +63,7 @@ or
 
     imessage_reader -o excel
 
-You can create a SQLite3 database containing users, messages, date and service (SMS or iMessage). The file will be stored in the Documents folder:
+You can create an SQLite3 database containing users, messages, date and service (SMS or iMessage). The file will be stored in the Documents folder:
 
     imessage_reader -o s
 
@@ -71,7 +71,7 @@ or
 
     imessage_reader -o sqlite
 
-If you only want to see a list of recipients use:
+If you only want to see a list of recipients, use:
 
     imessage_reader -r
 
@@ -79,7 +79,7 @@ or
 
     imessage_reader --recipients
 
-**Note**: On **macOS** you need access to the *Library* folder in order to read the iMessage database file ("chat.db"). You can add access (for *Terminal* or *iTerm*) in
+**Note**: On **macOS** you need access to the *Library* folder to read the iMessage database file ("chat.db"). You can add access (for *Terminal* or *iTerm*) in
 
     > System Preferences > Security & Privacy > Privacy > Full Disk Access
 
@@ -93,7 +93,7 @@ In this example the chat.db file is located in the Downloads folder (on a Linux 
 
 ## Usage (import module)
 
-To get the messages use following code:
+To get the messages, use the following code:
 
     from imessage_reader import fetch_data
     
@@ -115,6 +115,7 @@ To get the messages use following code:
 * ~~Did the user receive the message via SMS or via iMessage?~~
 * ~~Create SQLite3 database.~~
 * ~~Specify a different path to the chat.db file.~~
+* Copy the chat.db file to the Desktop folder. So, the program will open the copied file.
 * Show attachments.
 * Add more tests.
 
